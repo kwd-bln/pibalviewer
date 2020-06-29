@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction } from "../actions";
+import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction } from "../actions/index";
 import { TopPageForm } from "../components/TopPageForm";
 import { AppState } from "../store";
 

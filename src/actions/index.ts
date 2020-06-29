@@ -1,10 +1,18 @@
-import { actionCreatorFactory } from '../node_modules/typescript-fsa';
-import { ApiData } from './reducer'
+import { actionCreatorFactory } from '../../node_modules/typescript-fsa';
+import { ApiData } from '../reducer'
 import { Dispatch } from "redux";
 
 const actionCreator = actionCreatorFactory()
 
-export const LoginAction = actionCreator('LOGIN')
+export const LoginAction = actionCreator<string>('LOGIN')
+
+export const InputUserAction = actionCreator<string>('INPUT_USER')
+
+export const InputPassAction = actionCreator<string>('INPUT_PASS')
+
+export const StartLoadingAction = actionCreator('START_LOADING')
+
+export const FinishLoadingAction = actionCreator('FINISH_LOADING')
 
 export const EnlargeAction = actionCreator('ACTION_ENLARGE')
 

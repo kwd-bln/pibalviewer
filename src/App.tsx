@@ -11,9 +11,6 @@ import TopPageContainer from './containers/TopPageContainer';
 const App: React.FC = () => {
   return (
     <HashRouter>
-      <React.Fragment>
-        <TopPageContainer />
-      </React.Fragment>
       <Switch>
         <Route path="/login" component={Login} />
         {/* <Route path="/info" component={Info} />
@@ -22,7 +19,7 @@ const App: React.FC = () => {
           <Route exact path="/" component={Home} />
         </Auth> */}
         <Auth>
-          <Route exact path="/" component={() => <>Top!</>} />
+          <Route exact path="/" component={() => <TopPageContainer />} />
         </Auth>
         <Route path="/detail/" component={() => <>Detail!</>} />
       </Switch>
