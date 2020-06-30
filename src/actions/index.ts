@@ -1,6 +1,6 @@
 import { actionCreatorFactory } from '../../node_modules/typescript-fsa';
 import { ApiData } from '../reducer'
-import { Dispatch } from "redux";
+// import { Dispatch } from "redux";
 import { DateInfo, WindInfo } from '../states/IPibalDataList';
 
 const actionCreator = actionCreatorFactory()

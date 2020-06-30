@@ -3,7 +3,7 @@ import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction, 
 import { LoginAction, StartLoadingAction, FinishLoadingAction, InputPassAction, InputUserAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, FinishFetchPibalDataAction} from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
-import { PibalDataInfo, DateInfo } from './states/IPibalDataList'
+import { PibalDataInfo } from './states/IPibalDataList'
 
 export const initialState: IState = {
 	login: false,
@@ -50,19 +50,21 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(InputPassAction, (state, password) => {
 		return { ...state, password }
 	})
-	.case(StartLoadingAction, state => {
+	.case(StartFetchDatesAction, state => {
+		console.log("startFetchDatesAction")
 		const fetchingDates = true
 		return { ...state, fetchingDates}
 	})
-	.case(FinishLoadingAction, state => {
+	.case(FinishFetchDatesAction, state => {
+		console.log("FinishFetchDatesAction")
 		const fetchingDates = false
 		return { ...state, fetchingDates}
 	})
-	.case(StartLoadingAction, state => {
+	.case(StartFetchPibalDataAction, state => {
 		const fetchingPibalData = true
 		return { ...state, fetchingPibalData }
 	})
-	.case(FinishLoadingAction, state => {
+	.case(FinishFetchPibalDataAction, state => {
 		const fetchingPibalData = false
 		return { ...state, fetchingPibalData}
 	})
@@ -90,7 +92,7 @@ export const Reducer = reducerWithInitialState(initialState)
 	})
 	// どのフライトのパイバルデータを見せるか選択
 	.case(SelectFlightAction, (state, id) => {
-		const selectedDateInfo = state.dateInfoList.find(d => d.id == id)
+		const selectedDateInfo = state.dateInfoList.find(d => d.id === id)
 		if (selectedDateInfo) {
 			const selected: PibalDataInfo = {
 				id: id,

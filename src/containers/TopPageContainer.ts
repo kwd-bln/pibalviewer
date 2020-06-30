@@ -4,7 +4,7 @@ import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction }
 import { StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, FinishFetchPibalDataAction, SetDateInfoListAction, SetCurrentWindInfoListAction } from "../actions/index";
 import { TopPageForm } from "../components/TopPageForm";
 import { AppState } from "../store"
-import { DateInfo, PibalDataInfo, WindInfo, Wind } from "./../states/IPibalDataList"
+import { DateInfo, WindInfo, Wind } from "./../states/IPibalDataList"
 
 type WindApi = {
 	height: number,
@@ -63,6 +63,7 @@ export const fetchDetes = (token: string): Function => {
 			headers: { 'x-access-token': token }
 		}).then((res) => res.json())
 			.then((obj) => {
+				console.log("fetchDate", obj)
 				const apiDateList: ApiDateAndTiming[] = obj.data
 				let mappedList: DateInfo[] = apiDateList.map((apiDate, index) => {
           return {

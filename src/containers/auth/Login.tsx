@@ -6,7 +6,7 @@ import { LoginAction, InputPassAction, InputUserAction, StartLoadingAction, Fini
 import { withRouter } from 'react-router';
 import InputComp from '../../components/InputComp'
 import * as H from 'history';
-const cl = console.log.bind(console)
+// const cl = console.log.bind(console)
 
 interface OwnProps {
   login: boolean
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch): LoginHandler => {
     handleClickLoginButton: () => { dispatch(LoginAction("aaa")) },
     handleOnChangeValueOfUserInput: (value: string) => { dispatch(InputUserAction(value))},
     handleOnChangeValueOfPassInput: (value: string) => { dispatch(InputPassAction(value))},
-    handleOnClickSubmitButton: async (username: string, password: string, history: H.History) => { await getToken(username, password, history)(dispatch) }
+    handleOnClickSubmitButton: async (username: string, password: string, history: H.History) => { getToken(username, password, history)(dispatch) }
   }
 }
 
@@ -47,6 +47,7 @@ export const getToken = (username: string, password: string, history: H.History)
       "postUser": username,
       "postPass": password,
     })
+    console.log(body)
     dispatch(StartLoadingAction())
     await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
       method: "POST",
@@ -55,7 +56,10 @@ export const getToken = (username: string, password: string, history: H.History)
       },
       body
     })
-    .then(res => res.json())
+    .then(res => {
+      console.log("res.jsonのところ")
+      return res.json()
+    })
     .then(json => {
       if (json.success) {
         localStorage.setItem("auth_token", json.token)
@@ -106,10 +110,10 @@ export class Login extends React.Component<OwnProps&LoginHandler> {
           </ul>
           {this.renderSubmit()}
         </form>
-        <button onClick={() => {
+        {/* <button onClick={() => {
           this.props.handleClickLoginButton()
           this.props.history.push('/')
-          }}>ログインする</button>
+          }}>ログインする</button> */}
       </div>
     )
   }
