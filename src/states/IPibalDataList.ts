@@ -1,12 +1,15 @@
-export default interface IPibalDataList {
-  list: PibalInfo[]
-}
 
-export type PibalInfo = {
+export interface DateInfo {
   id: number
   date: Date
   timePeriod: string
-  infoList: WindInfo[]
+}
+
+export interface PibalDataInfo {
+  id: number
+  date: Date
+  timePeriod: string
+  windInfoList: WindInfo[]
 }
 
 export type WindInfo = {
@@ -14,12 +17,6 @@ export type WindInfo = {
   minutes: number
   winds: Wind[]
   visible: boolean
-}
-
-export type YMD = {
-  year: number,
-  month: number,
-  day: number
 }
 
 export type Wind = {

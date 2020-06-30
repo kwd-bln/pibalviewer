@@ -48,7 +48,7 @@ export const getToken = (username: string, password: string, history: H.History)
       "postPass": password,
     })
     dispatch(StartLoadingAction())
-    await fetch("http://localhost:8080/api/v1/authenticate", {
+    await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
       method: "POST",
       headers:{
         'content-type': 'application/json; charset=UTF-8'
@@ -57,7 +57,6 @@ export const getToken = (username: string, password: string, history: H.History)
     })
     .then(res => res.json())
     .then(json => {
-      cl("json", json)
       if (json.success) {
         localStorage.setItem("auth_token", json.token)
         dispatch(LoginAction(json.token))
@@ -67,7 +66,7 @@ export const getToken = (username: string, password: string, history: H.History)
       return 
     })
     .catch(error => {
-      console.log("error:", error)
+      console.log(" getToken error:", error)
       dispatch(FinishLoadingAction())
       history.push('/')
     })

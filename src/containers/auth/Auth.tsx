@@ -26,13 +26,12 @@ interface AuthHandler {
 }
 
 export const setLoginState = (history: H.History): Function => {
-  cl("getLoginState")
   return async (dispatch: Dispatch) => {
     const auth_token = localStorage.auth_token
     // token が見つからなかったら return
     if (!auth_token) return
     dispatch(StartLoadingAction())
-    await fetch('http://localhost:8080/api/v1/successLogin', {
+    await fetch('https://oval-silicon-280513.an.r.appspot.com/api/v1/successLogin', {
       headers: { 'x-access-token': auth_token }
     })
     .then(res => {
@@ -41,9 +40,10 @@ export const setLoginState = (history: H.History): Function => {
     .then(json => {
       if (json.success) {
         dispatch(LoginAction(auth_token))
+      } else {
+        localStorage.clear()
       }
       dispatch(FinishLoadingAction())
-      console.log("finishLoadingSetLoginState")
       history.push('/')
       return 
     })
@@ -63,7 +63,8 @@ class Auth extends React.Component<OwnProps&AuthHandler, State> {
     }
   }
   async componentWillMount() {
-    if (!this.props.loading) {
+    console.log("Auth componentWillMount!!", this.props.loading)
+    if (!this.props.loading && !this.props.login) {
       cl("this.props componentDidMount", this.props)
       await this.props.handleSetLoginState(this.props.history)
     }
@@ -76,10 +77,12 @@ class Auth extends React.Component<OwnProps&AuthHandler, State> {
       return <div>loading</div>
     } else {
       if (this.props.login) {
+        console.log("Go to Top page")
         return (
           <Route children={this.props.children} />
         )
       } else {
+        console.log("Go to Login page")
         return (
           <Redirect to={'/login'} />
         )

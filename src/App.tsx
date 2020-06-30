@@ -13,13 +13,8 @@ const App: React.FC = () => {
     <HashRouter>
       <Switch>
         <Route path="/login" component={Login} />
-        {/* <Route path="/info" component={Info} />
-        <Route path="/term" component={Term} />
         <Auth>
-          <Route exact path="/" component={Home} />
-        </Auth> */}
-        <Auth>
-          <Route exact path="/" component={() => <TopPageContainer />} />
+          <Route exact path="/" component={TopPageContainer} />
         </Auth>
         <Route path="/detail/" component={() => <>Detail!</>} />
       </Switch>

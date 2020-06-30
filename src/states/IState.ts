@@ -1,4 +1,4 @@
-import IPibalDataList from './IPibalDataList';
+import { DateInfo, PibalDataInfo } from './IPibalDataList';
 
 export default interface IState {
   login: boolean
@@ -6,8 +6,10 @@ export default interface IState {
   username: string
   password: string
   loading: boolean
+  fetchingDates: boolean
+  fetchingPibalData: boolean
   hasError: boolean
   scale: number
-  selected: number
-  pibalDataList: IPibalDataList
+  selected?: PibalDataInfo
+  dateInfoList: DateInfo[]
 }
