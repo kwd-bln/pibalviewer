@@ -6,6 +6,7 @@ export default interface IState {
   username: string
   password: string
   loading: boolean
+  creatingToken: boolean
   fetchingDates: boolean
   fetchingPibalData: boolean
   hasError: boolean

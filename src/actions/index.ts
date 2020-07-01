@@ -15,6 +15,10 @@ export const StartLoadingAction = actionCreator('START_LOADING')
 
 export const FinishLoadingAction = actionCreator('FINISH_LOADING')
 
+export const StartCreateTokenAction = actionCreator('START_CREATE_TOKEN')
+
+export const FinishCreateTokenAction = actionCreator('FINISH_CREATE_TOKEN')
+
 export const StartFetchDatesAction = actionCreator('START_FETCH_DATES')
 
 export const FinishFetchDatesAction = actionCreator('FINISH_FETCH_DATES')

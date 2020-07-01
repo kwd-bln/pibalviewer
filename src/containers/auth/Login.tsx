@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { Dispatch } from "redux";
-import { LoginAction, InputPassAction, InputUserAction, StartLoadingAction, FinishLoadingAction } from "../../actions/index";
+import { LoginAction, InputPassAction, InputUserAction, StartLoadingAction, FinishLoadingAction, StartCreateTokenAction, FinishCreateTokenAction } from "../../actions/index";
 import { withRouter } from 'react-router';
 import InputComp from '../../components/InputComp'
 import * as H from 'history';
@@ -48,7 +48,8 @@ export const getToken = (username: string, password: string, history: H.History)
       "postPass": password,
     })
     console.log(body)
-    dispatch(StartLoadingAction())
+    console.log("getToken fetch authenticate")
+    dispatch(StartCreateTokenAction())
     await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
       method: "POST",
       headers:{
@@ -65,13 +66,13 @@ export const getToken = (username: string, password: string, history: H.History)
         localStorage.setItem("auth_token", json.token)
         dispatch(LoginAction(json.token))
       }
-      dispatch(FinishLoadingAction())
+      dispatch(FinishCreateTokenAction())
       history.push('/')
       return 
     })
     .catch(error => {
       console.log(" getToken error:", error)
-      dispatch(FinishLoadingAction())
+      dispatch(FinishCreateTokenAction())
       history.push('/')
     })
   } 
@@ -84,6 +85,19 @@ export class Login extends React.Component<OwnProps&LoginHandler> {
   async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const username = this.props.username
     const password = this.props.password
+    const body = JSON.stringify({
+      "postUser": username,
+      "postPass": password,
+    })
+    console.log("handle submit try")
+    // await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
+    //   method: "POST",
+    //   headers:{
+    //     'content-type': 'application/json; charset=UTF-8'
+    //   },
+    //   body
+    // }).then(res => res.json())
+    // .then(obj => console.log(obj))
     await this.props.handleOnClickSubmitButton(username, password, this.props.history)
   }
 
