@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pibalviewer/precache-manifest.d07759b308a1fab1b363d3d8ef057386.js"
+  "/pibalviewer/precache-manifest.e31869eb094c9964120f402fb9f0f4e5.js"
 );
 
 self.addEventListener('message', (event) => {
