@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { Dispatch } from "redux";
-import { LoginAction, InputPassAction, InputUserAction, StartLoadingAction, FinishLoadingAction, StartCreateTokenAction, FinishCreateTokenAction } from "../../actions/index";
+import { LoginAction, InputPassAction, InputUserAction, StartCreateTokenAction, FinishCreateTokenAction } from "../../actions/index";
 import { withRouter } from 'react-router';
 import InputComp from '../../components/InputComp'
 import * as H from 'history';
@@ -14,6 +14,7 @@ interface OwnProps {
   username: string
   password: string
   history: H.History
+  creatingToken: boolean
 }
 
 export interface LoginHandler {
@@ -28,7 +29,8 @@ const mapStateToProps = (appState: AppState) => {
     login: appState.state.login,
     loading: appState.state.loading,
     username: appState.state.username,
-    password: appState.state.password
+    password: appState.state.password,
+    creatingToken: appState.state.creatingToken
   }
 }
 
@@ -58,7 +60,6 @@ export const getToken = (username: string, password: string, history: H.History)
       body
     })
     .then(res => {
-      console.log("res.jsonのところ")
       return res.json()
     })
     .then(json => {
@@ -89,21 +90,12 @@ export class Login extends React.Component<OwnProps&LoginHandler> {
       "postUser": username,
       "postPass": password,
     })
-    console.log("handle submit try")
-    // await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
-    //   method: "POST",
-    //   headers:{
-    //     'content-type': 'application/json; charset=UTF-8'
-    //   },
-    //   body
-    // }).then(res => res.json())
-    // .then(obj => console.log(obj))
     await this.props.handleOnClickSubmitButton(username, password, this.props.history)
   }
 
   
   renderSubmit() {
-    return this.props.loading ? <p>Loading</p> : <input type="submit" value="Send" />;
+    return this.props.creatingToken ? <p>Loading</p> : <input type="submit" value="Send" />;
   }
 
   render() {
@@ -124,10 +116,6 @@ export class Login extends React.Component<OwnProps&LoginHandler> {
           </ul>
           {this.renderSubmit()}
         </form>
-        {/* <button onClick={() => {
-          this.props.handleClickLoginButton()
-          this.props.history.push('/')
-          }}>ログインする</button> */}
       </div>
     )
   }
