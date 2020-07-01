@@ -49,7 +49,7 @@ export const getToken = (username: string, password: string, history: H.History)
       "postUser": username,
       "postPass": password,
     })
-    console.log(body)
+    console.log(body, history)
     console.log("getToken fetch authenticate")
     dispatch(StartCreateTokenAction());
 
