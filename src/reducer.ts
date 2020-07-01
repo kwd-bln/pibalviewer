@@ -50,6 +50,7 @@ export const Reducer = reducerWithInitialState(initialState)
 		return { ...state, creatingToken }
 	})
 	.case(FinishCreateTokenAction, state => {
+		console.log("FinishCreateTokenAction")
 		const creatingToken = false
 		return { ...state, creatingToken }
 	})
@@ -127,6 +128,7 @@ export const Reducer = reducerWithInitialState(initialState)
 	// login
 	.case(LoginAction, (state, token) => {
 		const login = true
+		console.log("Login Action", login, token)
 		return { ...state, login, token } 
 	})
 	.build()

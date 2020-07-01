@@ -62,7 +62,7 @@ class Auth extends React.Component<OwnProps&AuthHandler, State> {
       isLoading: false,
     }
   }
-  async componentWillMount() {
+  async componentDidMount() {
     console.log("Auth componentWillMount!!", this.props.loading)
     if (!this.props.loading && !this.props.login) {
       cl("this.props componentDidMount", this.props)

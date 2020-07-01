@@ -3,6 +3,7 @@ import { TopPageHandler } from '../containers/TopPageContainer';
 import SelectList from './SelectList'
 import Glaph from './Glaph'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
+import { Table } from './Table';
 
 interface OwnProps {
 	token: string
@@ -47,14 +48,13 @@ export class TopPageForm extends React.Component<Props> {
 				{(() => {
 					if (this.props.selected) {
 						return (
-						<Glaph windInfoList={this.props.selected.windInfoList}/>
+							<div>
+								<Glaph windInfoList={this.props.selected.windInfoList}/>
+								<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
+							</div>
 						)
 					}
 				})()}
-				{/* <Glaph dataList={this.state.current.dataList} /> */}
-				{/* <div className='arrow-table'>
-					<Table dataList={this.state.current.dataList} dateText={getSelectText(this.state.current.date)} />
-				</div> */}
 				{/* <ShowState inputValue={this.props.inputValue} selectedValue={this.props.selectedValue} clickCount={this.props.clickCount} /> */}
 
 			</React.Fragment>

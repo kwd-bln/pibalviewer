@@ -51,18 +51,19 @@ export const getToken = (username: string, password: string, history: H.History)
     })
     console.log(body)
     console.log("getToken fetch authenticate")
-    dispatch(StartCreateTokenAction())
+    dispatch(StartCreateTokenAction());
+
     await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
       method: "POST",
+      cache: "no-cache",
       headers:{
         'content-type': 'application/json; charset=UTF-8'
       },
       body
     })
-    .then(res => {
-      return res.json()
-    })
+    .then(res => res.json())
     .then(json => {
+      console.log(json)
       if (json.success) {
         localStorage.setItem("auth_token", json.token)
         dispatch(LoginAction(json.token))
@@ -86,10 +87,6 @@ export class Login extends React.Component<OwnProps&LoginHandler> {
   async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const username = this.props.username
     const password = this.props.password
-    const body = JSON.stringify({
-      "postUser": username,
-      "postPass": password,
-    })
     await this.props.handleOnClickSubmitButton(username, password, this.props.history)
   }
 
