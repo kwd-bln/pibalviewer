@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch: Dispatch): LoginHandler => {
     handleClickLoginButton: () => { dispatch(LoginAction("aaa")) },
     handleOnChangeValueOfUserInput: (value: string) => { dispatch(InputUserAction(value))},
     handleOnChangeValueOfPassInput: (value: string) => { dispatch(InputPassAction(value))},
-    handleOnClickSubmitButton: async (username: string, password: string, history: H.History) => { getToken(username, password, history)(dispatch) }
+    handleOnClickSubmitButton:  () => { dispatch(StartCreateTokenAction()) }
   }
 }
 
@@ -49,17 +49,15 @@ export const getToken = (username: string, password: string, history: H.History)
       "postUser": username,
       "postPass": password,
     })
+    const r=JSON.stringify({postUser:username,postPass:password})
     console.log(body, history)
     console.log("getToken fetch authenticate")
     dispatch(StartCreateTokenAction());
 
     await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
       method: "POST",
-      cache: "no-cache",
-      headers:{
-        'content-type': 'application/json; charset=UTF-8'
-      },
-      body
+      headers:{"content-type":"application/json; charset=UTF-8"},
+      body: r
     })
     .then(res => res.json())
     .then(json => {
@@ -79,8 +77,6 @@ export const getToken = (username: string, password: string, history: H.History)
     })
   } 
 }
-
-
 
 export class Login extends React.Component<OwnProps&LoginHandler> {
 

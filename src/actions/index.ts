@@ -1,11 +1,15 @@
 import { actionCreatorFactory } from '../../node_modules/typescript-fsa';
 import { ApiData } from '../reducer'
 // import { Dispatch } from "redux";
-import { DateInfo, WindInfo } from '../states/IPibalDataList';
+import { DateInfo, WindInfo } from '../states/IPibalDataList'
+
+export const REQUEST_LOGIN = 'REQUEST_LOGIN'
+export const START_CREATE_TOKEN = 'START_CREATE_TOKEN'
+export const FINISH_CREATE_TOKEN = 'FINISH_CREATE_TOKEN'
 
 const actionCreator = actionCreatorFactory()
 
-export const LoginAction = actionCreator<string>('LOGIN')
+export const LoginAction = actionCreator<string>(REQUEST_LOGIN)
 
 export const InputUserAction = actionCreator<string>('INPUT_USER')
 
