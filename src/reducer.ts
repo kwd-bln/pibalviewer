@@ -50,7 +50,6 @@ export const Reducer = reducerWithInitialState(initialState)
 		return { ...state, creatingToken }
 	})
 	.case(FinishCreateTokenAction, state => {
-		console.log("FinishCreateTokenAction")
 		const creatingToken = false
 		return { ...state, creatingToken }
 	})
@@ -61,12 +60,10 @@ export const Reducer = reducerWithInitialState(initialState)
 		return { ...state, password }
 	})
 	.case(StartFetchDatesAction, state => {
-		console.log("startFetchDatesAction")
 		const fetchingDates = true
 		return { ...state, fetchingDates}
 	})
 	.case(FinishFetchDatesAction, state => {
-		console.log("FinishFetchDatesAction")
 		const fetchingDates = false
 		return { ...state, fetchingDates}
 	})
@@ -93,27 +90,8 @@ export const Reducer = reducerWithInitialState(initialState)
 		return { ...state, dateInfoList }
 	})
 	// pibalDateを取ってきてcurrentに入れる。
-	.case(SetCurrentWindInfoListAction, (state, windInfoList) => {
-		if (state.selected) {
-			const selected = { ...state.selected, windInfoList}
-			return { ...state, selected }
-		}
-		return state
-	})
-	// どのフライトのパイバルデータを見せるか選択
-	.case(SelectFlightAction, (state, id) => {
-		const selectedDateInfo = state.dateInfoList.find(d => d.id === id)
-		if (selectedDateInfo) {
-			const selected: PibalDataInfo = {
-				id: id,
-				date: selectedDateInfo.date,
-				timePeriod: selectedDateInfo.timePeriod,
-				windInfoList: []
-			}
-			return { ...state, selected }
-		} else {
-			return { ...state }
-		}
+	.case(SetCurrentWindInfoListAction, (state, selected) => {
+		return { ...state, selected }
 	})
 	// そのパイバルデータを見せる or 見せない
 	.case(ToggleVisibleAction, (state, pibalIndex) => {
