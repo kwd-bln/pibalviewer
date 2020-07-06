@@ -11,10 +11,13 @@ export const FINISH_FETCH_DATES = 'FINISH_FETCH_DATES'
 export const SET_DATES = 'SET_DATES'
 export const SELECT_FLIGHT = 'SELECT_FLIGHT'
 export const SET_WIND = 'SET_WIND'
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
 
 const actionCreator = actionCreatorFactory()
 
 export const LoginAction = actionCreator<string>(REQUEST_LOGIN)
+
+export const LogoutAction = actionCreator(REQUEST_LOGOUT)
 
 export const InputUserAction = actionCreator<string>('INPUT_USER')
 
