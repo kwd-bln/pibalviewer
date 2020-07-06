@@ -18,7 +18,6 @@ interface OwnProps {
 }
 
 export interface LoginHandler {
-  handleClickLoginButton(): void
   handleOnChangeValueOfUserInput(value: string): void
   handleOnChangeValueOfPassInput(value: string): void
   handleOnClickSubmitButton(username: string, password: string, history: H.History): void
@@ -36,46 +35,10 @@ const mapStateToProps = (appState: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): LoginHandler => {
   return {
-    handleClickLoginButton: () => { dispatch(LoginAction("aaa")) },
     handleOnChangeValueOfUserInput: (value: string) => { dispatch(InputUserAction(value))},
     handleOnChangeValueOfPassInput: (value: string) => { dispatch(InputPassAction(value))},
     handleOnClickSubmitButton:  () => { dispatch(StartCreateTokenAction()) }
   }
-}
-
-export const getToken = (username: string, password: string, history: H.History): Function => {
-  return async (dispatch: Dispatch) => {
-    const body = JSON.stringify({
-      "postUser": username,
-      "postPass": password,
-    })
-    const r=JSON.stringify({postUser:username,postPass:password})
-    console.log(body, history)
-    console.log("getToken fetch authenticate")
-    dispatch(StartCreateTokenAction());
-
-    await fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
-      method: "POST",
-      headers:{"content-type":"application/json; charset=UTF-8"},
-      body: r
-    })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json)
-      if (json.success) {
-        localStorage.setItem("auth_token", json.token)
-        dispatch(LoginAction(json.token))
-      }
-      dispatch(FinishCreateTokenAction())
-      history.push('/')
-      return 
-    })
-    .catch(error => {
-      console.log(" getToken error:", error)
-      dispatch(FinishCreateTokenAction())
-      history.push('/')
-    })
-  } 
 }
 
 export class Login extends React.Component<OwnProps&LoginHandler> {
