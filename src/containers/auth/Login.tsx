@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from "react-redux";
 import { AppState } from "../../store";
 import { Dispatch } from "redux";
-import { LoginAction, InputPassAction, InputUserAction, StartCreateTokenAction, FinishCreateTokenAction } from "../../actions/index";
+import { InputPassAction, InputUserAction, StartCreateTokenAction } from "../../actions/index";
 import { withRouter } from 'react-router';
 import InputComp from '../../components/InputComp'
 import * as H from 'history';
-// const cl = console.log.bind(console)
 
 interface OwnProps {
   login: boolean

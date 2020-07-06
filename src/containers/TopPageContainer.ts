@@ -29,8 +29,7 @@ export interface TopPageHandler {
 	handleClickShrinkButton(): void
 	handleOnChangeValue(value: number): void
 	handleOnSelectToggleButton(value: number): void
-	handleOnLoadDates(token: string): void
-	handleOnLoadPiabalInfo(date: Date, timePeriod: string, token: string): void
+	handleOnLoadDates(): void
 }
 
 const mapStateToProps = (appState: AppState) => {
@@ -50,94 +49,10 @@ const mapDispatchToProps = (dispatch: Dispatch): TopPageHandler => {
 		handleClickShrinkButton: () => { dispatch(ShirinkAction()) },
 		handleOnChangeValue: (value: number) => { dispatch(SelectFlightAction(value)) },
 		handleOnSelectToggleButton: (value: number) => { dispatch(ToggleVisibleAction(value)) },
-		handleOnLoadDates: (token: string) => { fetchDetes(token)(dispatch) },
-		handleOnLoadPiabalInfo: (date: Date, timePeriod: string, token: string) => { fetchWindInfo(date, timePeriod, token)(dispatch) }
+		handleOnLoadDates: () => { dispatch(StartFetchDatesAction()) },
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TopPageForm)
-
-export const fetchDetes = (token: string): Function => {
-	return (dispatch: Dispatch): void => {
-		dispatch(StartFetchDatesAction());
-		fetch('https://oval-silicon-280513.an.r.appspot.com/api/v1/dates', {
-			headers: { 'x-access-token': token }
-		}).then((res) => res.json())
-			.then((obj) => {
-				console.log("fetchDate", obj)
-				const apiDateList: ApiDateAndTiming[] = obj.data
-				let mappedList: DateInfo[] = apiDateList.map((apiDate, index) => {
-          return {
-						id: index,
-						date: getDateFrom(apiDate.date),
-						timePeriod: apiDate.timing
-					}
-				})
-				mappedList.sort((a, b) => a.date.getTime() - b.date.getTime())
-				dispatch(SetDateInfoListAction(mappedList))
-				dispatch(FinishFetchDatesAction())
-				if (mappedList.length !== 0) {
-					dispatch(SelectFlightAction(0))
-				}
-			})
-			.catch((err) => {
-				console.log("error in fetchDetes:", err)
-				dispatch(FinishFetchDatesAction())
-			});
-	}
-}
-
-export const fetchWindInfo = (date: Date, timePeriod: string, token: string) => {
-	return (dispatch: Dispatch): void => {
-		getPibalInfo(dispatch, date, timePeriod, token)
-	}
-}
-
-function getPibalInfo(dispatch: Dispatch, date: Date, timePeriod: string, token: string) {
-	const yyyymmdd = getYYYYMMDD(date)
-	dispatch(StartFetchPibalDataAction())
-	fetch(`https://oval-silicon-280513.an.r.appspot.com/api/v1/${yyyymmdd}/${timePeriod}`, {
-		headers: { 'x-access-token': token }
-	})
-	.then(res => res.json())
-	.then(obj => {
-		if (obj.data.length) {
-			const windInfoList: WindInfo[] = []
-			const infos: ApiData[] = obj.data[0].infos
-			infos.forEach(info => {
-				const hours = info.hours
-				const minutes = info.minutes
-				const winds: Wind[] = info.winds.map(w => {
-					return {
-						alt: w.height,
-						deg: w.degree,
-						spd: w.speed
-					}
-				})
-				windInfoList.push({
-					hours: hours,
-					minutes: minutes,
-					winds: winds,
-					visible: true
-				})
-			})
-			dispatch(SetCurrentWindInfoListAction(windInfoList))
-			dispatch(FinishFetchPibalDataAction())
-		}
-	})
-	.catch(err => {
-		console.log("error in getPibalInfo:", err)
-		dispatch(FinishFetchPibalDataAction())
-	})
-}
-
-
-function getDateFrom(yyyymmdd: string): Date {
-	const year = Number(yyyymmdd.slice(0, 4))
-	const month = Number(yyyymmdd.slice(4, 6))
-	const day = Number(yyyymmdd.slice(6))
-	return new Date(year, month, day)
-}
-
 export function getYYYYMMDD(date: Date):string {
 	const y = date.getFullYear().toString()
 	const m = ("00" + date.getMonth()).slice(-2)

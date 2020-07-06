@@ -57,7 +57,7 @@ export function fetchDetes(token: string): Promise<{dateList?: DateInfo[], error
         timePeriod: apiDate.timing
       }
     })
-    dateList.sort((a, b) => a.date.getTime() - b.date.getTime())
+    dateList.sort((a, b) => b.date.getTime() - a.date.getTime())
     return { dateList }
   })
   .catch(error => {
@@ -65,7 +65,7 @@ export function fetchDetes(token: string): Promise<{dateList?: DateInfo[], error
   })
 }
 
-export function fetchWindInfo(token: string, date: Date, timePeriod: string): Promise<{windInfoLists?: WindInfo[], error?: string}> {
+export function fetchWindInfo(token: string, date: Date, timePeriod: string): Promise<{windInfoList?: WindInfo[], error?: string}> {
   const yyyymmdd = getYYYYMMDD(date)
   return fetch(`https://oval-silicon-280513.an.r.appspot.com/api/v1/${yyyymmdd}/${timePeriod}`, {
 		headers: { 'x-access-token': token }

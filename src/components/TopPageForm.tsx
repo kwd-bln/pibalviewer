@@ -17,28 +17,13 @@ interface OwnProps {
 type Props = OwnProps & TopPageHandler
 export class TopPageForm extends React.Component<Props> {
 	componentDidMount() {
-		console.log("componentDidMount")
 		if (this.props.token) {
 			if (this.props.dateInfoList.length === 0) {
 				// dateInfoListがからのとき、APIを叩く
 				console.log("fetch LoadDates")
-				this.props.handleOnLoadDates(this.props.token)
-			} else if (this.props.selected && this.props.selected.windInfoList.length === 0) {
-				const selected: PibalDataInfo = this.props.selected
-				this.props.handleOnLoadPiabalInfo(selected.date, selected.timePeriod, this.props.token)
+				this.props.handleOnLoadDates()
 			}
 		}
-	}
-
-	componentDidUpdate() {
-		if (this.props.token) {
-			console.log("fetch LoadPibalInfo")
-			if (this.props.selected && this.props.selected.windInfoList.length === 0) {
-				const selected: PibalDataInfo = this.props.selected
-				this.props.handleOnLoadPiabalInfo(selected.date, selected.timePeriod, this.props.token)
-			}
-		}
-
 	}
 
 	render() {
