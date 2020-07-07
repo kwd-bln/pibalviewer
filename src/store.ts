@@ -1,4 +1,4 @@
-import { combineReducers, createStore, compose, applyMiddleware} from 'redux'
+import { combineReducers, createStore, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga';
 import IState from './states/IState'
 import { Reducer } from './reducer'

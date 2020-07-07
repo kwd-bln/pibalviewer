@@ -2,15 +2,15 @@ import { push } from 'react-router-redux'
 import { take, put, fork, call, select, takeEvery } from 'redux-saga/effects'
 import { authorize, fetchDetes, fetchWindInfo } from './common/api'
 import { REQUEST_LOGIN, REQUEST_LOGOUT, START_CREATE_TOKEN, FINISH_CREATE_TOKEN, START_FETCH_DATES, FINISH_FETCH_DATES, SET_DATES, SELECT_FLIGHT, SET_WIND } from './actions'
-import { getToken, getUsername, getPassword, getDateInfoList } from './selectors'
+import { getToken, getDateInfoList } from './selectors'
 import { DateInfo, PibalDataInfo } from './states/IPibalDataList'
 
 function* authSaga() {
   while (true) {
-    yield take(START_CREATE_TOKEN)
+    const action = yield take(START_CREATE_TOKEN)
     
-    const username = yield select(getUsername)
-    const password = yield select(getPassword)
+    const username = action.payload.username
+    const password = action.payload.password
 
     const { token, error } = yield call(authorize, username, password)
 
@@ -24,6 +24,7 @@ function* authSaga() {
     }
 
     if (token) {
+      console.log("authsaga REQUEST_LOGIN")
       yield put({ type: REQUEST_LOGIN, payload: token })
       yield put({ type: FINISH_CREATE_TOKEN });
     }

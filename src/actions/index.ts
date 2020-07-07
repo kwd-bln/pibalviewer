@@ -1,7 +1,6 @@
 import { actionCreatorFactory } from '../../node_modules/typescript-fsa';
 import { ApiData } from '../reducer'
-// import { Dispatch } from "redux";
-import { DateInfo, WindInfo, PibalDataInfo } from '../states/IPibalDataList'
+import { DateInfo, PibalDataInfo } from '../states/IPibalDataList'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const START_CREATE_TOKEN = 'START_CREATE_TOKEN'
@@ -27,7 +26,7 @@ export const StartLoadingAction = actionCreator('START_LOADING')
 
 export const FinishLoadingAction = actionCreator('FINISH_LOADING')
 
-export const StartCreateTokenAction = actionCreator('START_CREATE_TOKEN')
+export const StartCreateTokenAction = actionCreator<{username: string, password: string}>('START_CREATE_TOKEN')
 
 export const FinishCreateTokenAction = actionCreator('FINISH_CREATE_TOKEN')
 
