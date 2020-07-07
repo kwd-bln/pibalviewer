@@ -1,79 +1,90 @@
-import React from 'react';
+import React from "react"
 import { connect } from "react-redux";
-import { AppState } from "../../store";
-import { Dispatch } from "redux";
-import { InputPassAction, InputUserAction, StartCreateTokenAction } from "../../actions/index";
-import { withRouter } from 'react-router';
-import InputComp from '../../components/InputComp'
-import * as H from 'history';
+import { useForm } from "react-hook-form"
+import { Dispatch } from "redux"
+import { AppState } from "../../store"
+import { StartCreateTokenAction } from "../../actions/index";
+import { Form, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
 
-interface OwnProps {
-  login: boolean
-  loading: boolean
+type FormData = {
   username: string
   password: string
-  history: H.History
-  creatingToken: boolean
 }
 
 export interface LoginHandler {
-  handleOnChangeValueOfUserInput(value: string): void
-  handleOnChangeValueOfPassInput(value: string): void
-  handleOnClickSubmitButton(username: string, password: string, history: H.History): void
+  handleOnClickSubmitButton(username: string, password: string): void
 }
 
-const mapStateToProps = (appState: AppState) => {
-  return {
-    login: appState.state.login,
-    loading: appState.state.loading,
-    username: appState.state.username,
-    password: appState.state.password,
-    creatingToken: appState.state.creatingToken
-  }
+const mapStateToProps = (state: AppState) => {
+  return {}
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): LoginHandler => {
   return {
-    handleOnChangeValueOfUserInput: (value: string) => { dispatch(InputUserAction(value))},
-    handleOnChangeValueOfPassInput: (value: string) => { dispatch(InputPassAction(value))},
-    handleOnClickSubmitButton:  () => { dispatch(StartCreateTokenAction()) }
+    handleOnClickSubmitButton: (username: string, password: string) => { dispatch(StartCreateTokenAction({ username, password })) }
   }
 }
 
-export class Login extends React.Component<OwnProps&LoginHandler> {
+const Login: React.FC<LoginHandler> = (props) => {
+  const { register, handleSubmit, errors, reset } = useForm<FormData>()
 
-  async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    const username = this.props.username
-    const password = this.props.password
-    await this.props.handleOnClickSubmitButton(username, password, this.props.history)
+  const handleOnSubmit = (data: FormData) => {
+    console.log(data.password, data.username)
+    props.handleOnClickSubmitButton(data.username, data.password)
+    reset()
   }
 
-  
-  renderSubmit() {
-    return this.props.creatingToken ? <p>Loading</p> : <input type="submit" value="Send" />;
-  }
-
-  render() {
-    console.log("login render", this.props.loading, this.props.login)
-    return (
-      <div>
-        <p>未ログイン</p>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <ul>
-            <li>
-              <p>name</p>
-              <p><InputComp name="name" value={this.props.username} onChangeValue={this.props.handleOnChangeValueOfUserInput}/></p>
-            </li>
-            <li>
-              <p>Password</p>
-              <p><InputComp name="pass" value={this.props.password} onChangeValue={this.props.handleOnChangeValueOfPassInput}/></p>
-            </li>
-          </ul>
-          {this.renderSubmit()}
-        </form>
-      </div>
-    )
-  }
+  return (
+    <Form noValidate onSubmit={handleSubmit(handleOnSubmit)}>
+      <Form.Group as={Row} controlId={'username'}>
+        <Form.Label column sm={3} xs={12}>{'ユーザー名'}</Form.Label>
+        <Col xs={{ span: 10, offset: 1 }} sm={7}>
+          <Form.Control
+            name={'username'}
+            placeholder={'username'}
+            type={'text'}
+            isInvalid={errors.username !== undefined}
+            ref={register({
+              required: "入力が必要です！"
+            })}
+          />
+          {
+            errors.username &&
+            <Form.Control.Feedback type="invalid">
+              {errors.username.message}
+            </Form.Control.Feedback>
+          }
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} controlId={'password'}>
+        <Form.Label column sm={3} xs={12}>{'パスワード'}</Form.Label>
+        <Col xs={{ span: 10, offset: 1 }} sm={7}>
+          <Form.Control
+            name={'password'}
+            placeholder={'password'}
+            type={'password'}
+            isInvalid={errors.password !== undefined}
+            ref={register({
+              required: "入力が必要です！"
+            })}
+          />
+        </Col>
+        {
+          errors.password &&
+          <Form.Control.Feedback type="invalid">
+            {errors.password.message}
+          </Form.Control.Feedback>
+        }
+      </Form.Group>
+      <Form.Group>
+        <Col sm={5}>
+          <ButtonToolbar>
+            <Button variant={'primary'} type="submit" >ログイン</Button>
+          </ButtonToolbar>
+        </Col>
+      </Form.Group>
+    </Form>
+  );
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

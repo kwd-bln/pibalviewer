@@ -1,15 +1,11 @@
 import { reducerWithInitialState } from '../node_modules/typescript-fsa-reducers';
-import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction, SetCurrentWindInfoListAction } from './actions/index';
-import { LoginAction, StartLoadingAction, FinishLoadingAction, StartCreateTokenAction, FinishCreateTokenAction, InputPassAction, InputUserAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, FinishFetchPibalDataAction} from './actions/index'
+import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SetCurrentWindInfoListAction } from './actions/index';
+import { LoginAction, StartLoadingAction, FinishLoadingAction, InputPassAction, InputUserAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, FinishFetchPibalDataAction, LogoutAction} from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
-import { PibalDataInfo } from './states/IPibalDataList'
 
 export const initialState: IState = {
-	login: false,
 	token: "",
-	username: "",
-  password: "",
 	loading: false,
 	creatingToken: false,
 	fetchingDates: false,
@@ -44,14 +40,6 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(FinishLoadingAction, (state) => {
 		const loading = false
 		return { ...state, loading }
-	})
-	.case(StartCreateTokenAction, state => {
-		const creatingToken = true
-		return { ...state, creatingToken }
-	})
-	.case(FinishCreateTokenAction, state => {
-		const creatingToken = false
-		return { ...state, creatingToken }
 	})
 	.case(InputUserAction, (state, username) => {
 		return { ...state, username }
@@ -105,8 +93,11 @@ export const Reducer = reducerWithInitialState(initialState)
 	})
 	// login
 	.case(LoginAction, (state, token) => {
-		const login = true
-		console.log("Login Action", login, token)
-		return { ...state, login, token } 
+		return { ...state, token } 
+	})
+	// logout
+	.case(LogoutAction, state => {
+		const token = ""
+		return { ...state, token } 
 	})
 	.build()
