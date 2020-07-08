@@ -4,6 +4,7 @@ import SelectList from './SelectList'
 import Glaph from './Glaph'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
 import { Table } from './Table';
+import { Tab, Tabs, Col } from 'react-bootstrap'
 
 interface OwnProps {
 	token: string
@@ -27,20 +28,28 @@ export class TopPageForm extends React.Component<Props> {
 	}
 
 	render() {
+		
 		return (
 			<React.Fragment>
 				<SelectList dateInfoList={this.props.dateInfoList} onChange={this.props.handleOnChangeValue}/>
 				{(() => {
 					if (this.props.selected) {
 						return (
-							<div>
-								<Glaph windInfoList={this.props.selected.windInfoList}/>
-								<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
-							</div>
+							<Tabs defaultActiveKey="glaph" id="uncontrolled-tab-example" className="nav-justified">
+								<Tab eventKey="glaph" title="Glaph">
+									<Col xs={11} sm={8}>
+										<Glaph windInfoList={this.props.selected.windInfoList}/>
+									</Col>
+								</Tab>
+								<Tab eventKey="table" title="Table">
+									<div>
+									<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
+									</div>
+								</Tab>
+							</Tabs>
 						)
 					}
 				})()}
-				{/* <ShowState inputValue={this.props.inputValue} selectedValue={this.props.selectedValue} clickCount={this.props.clickCount} /> */}
 
 			</React.Fragment>
 		)

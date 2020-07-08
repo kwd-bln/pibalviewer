@@ -29,7 +29,6 @@ const Login: React.FC<LoginHandler> = (props) => {
   const { register, handleSubmit, errors, reset } = useForm<FormData>()
 
   const handleOnSubmit = (data: FormData) => {
-    console.log(data.password, data.username)
     props.handleOnClickSubmitButton(data.username, data.password)
     reset()
   }

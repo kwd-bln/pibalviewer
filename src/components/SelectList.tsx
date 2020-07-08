@@ -25,7 +25,15 @@ const SelectList: React.FC<Props> = (props) => {
       <Select options={options} defaultValue={options[0]} className='dates-select' onChange={(selectedOption: ValueType<OptionType>) => {
         const value = (selectedOption as OptionType).value
         props.onChange(value)
-      }} />
+      }} theme={theme => ({
+        ...theme,
+        borderRadius: 4,
+        colors: {
+          ...theme.colors,
+          primary70: 'skyblue',
+          primary: 'skyblue',
+        },
+      })}/>
     </div>
   )
 }
