@@ -4,7 +4,7 @@ import SelectList from './SelectList'
 import Glaph from './Glaph'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
 import { Table } from './Table';
-import { Tab, Tabs, Col } from 'react-bootstrap'
+import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
 
 interface OwnProps {
 	token: string
@@ -36,12 +36,26 @@ export class TopPageForm extends React.Component<Props> {
 					if (this.props.selected) {
 						return (
 							<Tabs defaultActiveKey="glaph" id="uncontrolled-tab-example" className="nav-justified">
-								<Tab eventKey="glaph" title="Glaph">
-									<Col xs={11} sm={8}>
-										<Glaph windInfoList={this.props.selected.windInfoList}/>
-									</Col>
+								<Tab eventKey="glaph" title="Glaph" tabClassName="my-tab">
+									<Container className="px-0">
+										<Row>
+											<Col xs={12} sm={8} className="px-0">
+												<Glaph windInfoList={this.props.selected.windInfoList} scaleRatio={this.props.scale} />
+												<ButtonGroup vertical className="myButtonClass">
+													<Button variant="info"
+														className="rounded-circle pull-right center-block my-button"
+														size="sm"
+														onClick={this.props.handleClickEnlargeButton}>＋</Button>
+													<Button variant="info"
+														className="rounded-circle pull-right center-block my-button "
+														size="sm"
+														onClick={this.props.handleClickShrinkButton}>−</Button>
+												</ButtonGroup>
+											</Col>
+										</Row>
+									</Container>
 								</Tab>
-								<Tab eventKey="table" title="Table">
+								<Tab eventKey="table" title="Table" tabClassName="my-tab">
 									<div>
 									<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
 									</div>

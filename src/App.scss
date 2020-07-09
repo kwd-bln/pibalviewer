@@ -17,6 +17,11 @@
   top: 0;
   left: 0;
   width: 100%;
+  overflow-x: hidden;
+}
+
+canvas {
+  overflow-x: hidden;
 }
 
 .dates-select {
@@ -44,3 +49,52 @@
   color: white;
   border-color: #e2e2e2
 }
+
+.myButtonClass {
+  position: absolute;
+  bottom: 10%;
+  right: 30px;
+}
+
+.my-button {
+  margin: 10px 0;
+  background-color: rgba(113, 215, 255, 0.8);
+  color: white;
+  border-color: rgba(113, 215, 255, 0.4);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.my-button:active {
+  background-color: rgb(6, 23, 255) !important;
+  color: white !important;
+  border-color: rgba(124, 9, 255, 0.7) !important;
+}
+
+.my-button:hover {
+  background-color: rgba(113, 215, 255, 0.8);
+  color: white;
+  border-color: rgba(113, 215, 255, 0.4);
+}
+
+.my-button:focus {
+  background-color: rgba(113, 215, 255, 0.8);
+  border-color: rgba(113, 215, 255, 0.4);
+  outline: none !important;
+  box-shadow:none !important;
+}
+
+.my-tab {
+  outline: none !important;
+  box-shadow:none !important;
+}
+
+.row {
+  width: 100%;
+  margin: 0px;
+}
+
+body {
+  overflow-x: hidden;
+ }

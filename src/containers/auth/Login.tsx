@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { Dispatch } from "redux"
 import { AppState } from "../../store"
 import { StartCreateTokenAction } from "../../actions/index";
-import { Form, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
+import { Form, Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 type FormData = {
   username: string
