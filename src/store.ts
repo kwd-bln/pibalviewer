@@ -15,6 +15,11 @@ export type AppState = {
 
 export default function configureStore(initialState?: AppState) {
   const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [sagaMiddleware, routerMiddleware(history)]
+
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger)
+  }
   const store = createStore(
     combineReducers<AppState>({
       state: Reducer,
@@ -22,7 +27,7 @@ export default function configureStore(initialState?: AppState) {
     }),
     initialState,
     applyMiddleware(
-      sagaMiddleware, logger, routerMiddleware(history)
+      ...middlewares
     )
   );
   sagaMiddleware.run(rootSaga);
