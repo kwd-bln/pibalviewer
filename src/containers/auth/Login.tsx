@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { Dispatch } from "redux"
 import { AppState } from "../../store"
 import { StartCreateTokenAction } from "../../actions/index";
-import { Form, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
+import { Form, Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 type FormData = {
   username: string
@@ -29,14 +29,15 @@ const Login: React.FC<LoginHandler> = (props) => {
   const { register, handleSubmit, errors, reset } = useForm<FormData>()
 
   const handleOnSubmit = (data: FormData) => {
-    console.log(data.password, data.username)
     props.handleOnClickSubmitButton(data.username, data.password)
     reset()
   }
 
   return (
+    <React.Fragment>
+      <img src={require("./img/fusen_fly_man.png")} className="login-image"></img>
     <Form noValidate onSubmit={handleSubmit(handleOnSubmit)}>
-      <Form.Group as={Row} controlId={'username'}>
+      <Form.Group as={Row} controlId={'username'} className="login-form">
         <Form.Label column sm={3} xs={12}>{'ユーザー名'}</Form.Label>
         <Col xs={{ span: 10, offset: 1 }} sm={7}>
           <Form.Control
@@ -56,7 +57,7 @@ const Login: React.FC<LoginHandler> = (props) => {
           }
         </Col>
       </Form.Group>
-      <Form.Group as={Row} controlId={'password'}>
+      <Form.Group as={Row} controlId={'password'} className="login-form">
         <Form.Label column sm={3} xs={12}>{'パスワード'}</Form.Label>
         <Col xs={{ span: 10, offset: 1 }} sm={7}>
           <Form.Control
@@ -77,13 +78,14 @@ const Login: React.FC<LoginHandler> = (props) => {
         }
       </Form.Group>
       <Form.Group>
-        <Col sm={5}>
+        <Col sm={5} >
           <ButtonToolbar>
-            <Button variant={'primary'} type="submit" >ログイン</Button>
+            <Button variant={'primary'} type="submit" className="login-button">ログイン</Button>
           </ButtonToolbar>
         </Col>
       </Form.Group>
     </Form>
+    </React.Fragment>
   );
 }
 

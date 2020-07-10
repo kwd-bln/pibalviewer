@@ -29,17 +29,14 @@ class Auth extends React.Component<OwnProps&AuthHandler> {
       // localStorageにtokenがあって、stateにtokenがない場合、tokenをsetする
       this.props.setLocalStorageToken(auth_token) 
     }
-    console.log("authRender", this.props.loading, this.props.token.length > 0)
     if (this.props.loading) {
       return <div>loading</div>
     } else {
       if (this.props.token.length || auth_token) {
-        console.log("Go to Top page")
         return (
           <Route children={this.props.children} />
         )
       } else {
-        console.log("Go to Login page")
         return (
           <Redirect to={'/login'} />
         )

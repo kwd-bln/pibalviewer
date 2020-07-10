@@ -15,7 +15,8 @@ type PointsInfo = {
 }
 
 interface Props {
-  windInfoList: WindInfo[]
+  windInfoList: WindInfo[],
+  scaleRatio: number
 }
 
 const Glaph: React.FC<Props> = (props) => {
@@ -68,8 +69,6 @@ const Glaph: React.FC<Props> = (props) => {
       })
     })
 
-    console.log(props.windInfoList.map(d => d.winds) )
-
     // 最も遠い点の距離の計算
     const maxR = getRFrom(pointsList)
 
@@ -79,11 +78,10 @@ const Glaph: React.FC<Props> = (props) => {
     const originY: number = 240
 
     // scaleDistance * 3 = 144 になるように
-    const scaleDistance = getScaleDistanceFrom(maxR)
+    const scaleDistance = getScaleDistanceFrom(maxR, props.scaleRatio)
 
     const scaleLine = 48
     const scale = scaleLine / scaleDistance
-    console.log("maxR = ", maxR, "scale", scale, scaleDistance)
 
     // 原点の描画
     ctx.save();
@@ -131,7 +129,7 @@ const Glaph: React.FC<Props> = (props) => {
     // scaleのテキストの描画
     ctx.save();
     ctx.fillStyle = "black"
-    ctx.font = "10px"
+    ctx.font = "14px Arial"
     ctx.textAlign = "center"
     ctx.fillText(scaleDistance.toString() + 'm',
       canvasWidth * 0.3 + scaleLine * 0.5,
@@ -140,7 +138,6 @@ const Glaph: React.FC<Props> = (props) => {
 
     //　各点のプロット
     let numOfPoints = pointsList.length
-    console.log(pointsList)
     const hueStep = Math.min(360 / numOfPoints, 40)
     pointsList.forEach((data, index) => {
       if (data.visible) {
@@ -192,8 +189,8 @@ function getRFrom(pointsList: PointsInfo[]): number {
 }
 
 // scale円の単位距離を導出
-function getScaleDistanceFrom(maxR: number): number {
-  const oneThirdOfMaxR: number = Math.ceil(maxR / 3.2)
+function getScaleDistanceFrom(maxR: number, ratio: number): number {
+  const oneThirdOfMaxR: number = Math.ceil(maxR / 3.2 / ratio)
   
   // 3 * scale = maxDist / 1.1 になるようにする
   const ScaleDistance = Math.max(Number(oneThirdOfMaxR.toPrecision(2)), 10)
