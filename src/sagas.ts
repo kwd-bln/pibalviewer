@@ -14,8 +14,6 @@ function* authSaga() {
 
     const { token, error } = yield call(authorize, username, password)
 
-    console.log(`action${START_CREATE_TOKEN}, user: ${username}, pass: ${password}, token: ${token}, error: ${error}`)
-
     if (!token && error) {
       yield put({ type: FINISH_CREATE_TOKEN })
       localStorage.clear()
@@ -24,7 +22,6 @@ function* authSaga() {
     }
 
     if (token) {
-      console.log("authsaga REQUEST_LOGIN")
       yield put({ type: REQUEST_LOGIN, payload: token })
       yield put({ type: FINISH_CREATE_TOKEN });
     }
@@ -43,8 +40,6 @@ function* pageSaga() {
 function* fetchDatesSaga() {
   const token = yield select(getToken)
   const { dateList, error } = yield call(fetchDetes, token)
-
-  console.log(`action: ${START_FETCH_DATES}, dateList: ${dateList}, error: ${error}`)
 
   if (!dateList && error) {
     yield put({ type: FINISH_FETCH_DATES })
@@ -83,7 +78,6 @@ function* selectFlightSaga() {
         timePeriod: dateInfo.timePeriod,
         windInfoList: windInfoList
       } 
-      console.log(windInfoList)
       yield put({type: SET_WIND, payload: pibalDataInfo })
     }
   }

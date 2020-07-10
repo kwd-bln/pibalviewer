@@ -19,7 +19,6 @@ type ApiDateAndTiming = {
 
 export function authorize(user: string, pass: string): Promise<{token?: string, error?: string}> {
   const body = JSON.stringify({postUser: user, postPass: pass})
-  console.log("authorize", body)
 
   return fetch("https://oval-silicon-280513.an.r.appspot.com/api/v1/authenticate", {
     method: "POST",
@@ -39,7 +38,6 @@ export function authorize(user: string, pass: string): Promise<{token?: string, 
       return { error: 'such user is not exist'}
     })
     .catch(error => {
-      console.log('fetch error: ', error)
       return { error }
     })
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { WindInfo } from "../states/IPibalDataList";
-import { Button, Row, Col, ButtonGroup } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 interface Props {
   windInfoList: WindInfo[]

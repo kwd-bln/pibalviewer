@@ -69,8 +69,6 @@ const Glaph: React.FC<Props> = (props) => {
       })
     })
 
-    console.log(props.windInfoList.map(d => d.winds) )
-
     // 最も遠い点の距離の計算
     const maxR = getRFrom(pointsList)
 
@@ -84,7 +82,6 @@ const Glaph: React.FC<Props> = (props) => {
 
     const scaleLine = 48
     const scale = scaleLine / scaleDistance
-    console.log("maxR = ", maxR, "scale", scale, scaleDistance)
 
     // 原点の描画
     ctx.save();
@@ -141,7 +138,6 @@ const Glaph: React.FC<Props> = (props) => {
 
     //　各点のプロット
     let numOfPoints = pointsList.length
-    console.log(pointsList)
     const hueStep = Math.min(360 / numOfPoints, 40)
     pointsList.forEach((data, index) => {
       if (data.visible) {

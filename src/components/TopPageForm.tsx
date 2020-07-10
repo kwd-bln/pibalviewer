@@ -22,7 +22,6 @@ export class TopPageForm extends React.Component<Props> {
 		if (this.props.token) {
 			if (this.props.dateInfoList.length === 0) {
 				// dateInfoListがからのとき、APIを叩く
-				console.log("fetch LoadDates")
 				this.props.handleOnLoadDates()
 			}
 		}

@@ -83,7 +83,6 @@ export const Reducer = reducerWithInitialState(initialState)
 	})
 	// そのパイバルデータを見せる or 見せない
 	.case(ToggleVisibleAction, (state, pibalIndex) => {
-		console.log("ToggleVisibleAction", pibalIndex)
 		const currentSelected = state.selected
 		if (currentSelected) {
 			const visible = !currentSelected.windInfoList[pibalIndex].visible
@@ -91,7 +90,6 @@ export const Reducer = reducerWithInitialState(initialState)
 			const windInfoList = currentWindInfoList.map((w, i) => i === pibalIndex ? { ...w, visible} : w)
 
 			const selected = { ...currentSelected, windInfoList}
-			console.log(selected)
 			return { ...state, selected }
 		}
 		return state
