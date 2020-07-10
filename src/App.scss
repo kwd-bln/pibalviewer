@@ -246,6 +246,19 @@ $switch-transition: .2s all !default;
   width: 200px;
 }
 
+.login-button{
+  margin-top: 20px;
+}
+
+.login-form {
+  margin-top: 10px;
+}
+
 .form-group {
   margin-bottom: 0;
+}
+
+.login-image {
+  opacity: 0.3;
+  position: absolute;
 }
