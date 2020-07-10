@@ -5,6 +5,7 @@ import Glaph from './Glaph'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
 import { Table } from './Table';
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
+import ToggleVisibleButtons from './ToggleVisibleButtons'
 
 interface OwnProps {
 	token: string
@@ -37,7 +38,7 @@ export class TopPageForm extends React.Component<Props> {
 						return (
 							<Tabs defaultActiveKey="glaph" id="uncontrolled-tab-example" className="nav-justified">
 								<Tab eventKey="glaph" title="Glaph" tabClassName="my-tab">
-									<Container className="px-0">
+									<Container className="px-0" fluid>
 										<Row>
 											<Col xs={12} sm={8} className="px-0">
 												<Glaph windInfoList={this.props.selected.windInfoList} scaleRatio={this.props.scale} />
@@ -52,10 +53,11 @@ export class TopPageForm extends React.Component<Props> {
 														onClick={this.props.handleClickShrinkButton}>−</Button>
 												</ButtonGroup>
 											</Col>
+											<ToggleVisibleButtons windInfoList={this.props.selected.windInfoList} onClickAt={this.props.handleOnSelectToggleButton} />
 										</Row>
 									</Container>
 								</Tab>
-								<Tab eventKey="table" title="Table" tabClassName="my-tab">
+									<Tab eventKey="table" title="Table" tabClassName="my-tab">
 									<div>
 									<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
 									</div>

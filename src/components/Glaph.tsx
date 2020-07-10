@@ -132,7 +132,7 @@ const Glaph: React.FC<Props> = (props) => {
     // scaleのテキストの描画
     ctx.save();
     ctx.fillStyle = "black"
-    ctx.font = "10px"
+    ctx.font = "14px Arial"
     ctx.textAlign = "center"
     ctx.fillText(scaleDistance.toString() + 'm',
       canvasWidth * 0.3 + scaleLine * 0.5,
