@@ -9,7 +9,6 @@ import { Redirect, Route } from 'react-router-dom'
 import * as H from 'history';
 
 interface OwnProps {
-  loading: boolean
   history: H.History
   token: string
 }
@@ -29,18 +28,14 @@ class Auth extends React.Component<OwnProps&AuthHandler> {
       // localStorageにtokenがあって、stateにtokenがない場合、tokenをsetする
       this.props.setLocalStorageToken(auth_token) 
     }
-    if (this.props.loading) {
-      return <div>loading</div>
+    if (this.props.token.length || auth_token) {
+      return (
+        <Route children={this.props.children} />
+      )
     } else {
-      if (this.props.token.length || auth_token) {
-        return (
-          <Route children={this.props.children} />
-        )
-      } else {
-        return (
-          <Redirect to={'/login'} />
-        )
-      }
+      return (
+        <Redirect to={'/login'} />
+      )
     }
   }
 }
@@ -55,7 +50,6 @@ const mapDispatchToProps = (dispatch: Dispatch): AuthHandler => {
 const mapStateToProps = (appState: AppState) => {
   return {
     token: appState.state.token,
-    loading: appState.state.loading
   }
 }
 

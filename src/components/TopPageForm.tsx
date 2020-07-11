@@ -9,7 +9,6 @@ import ToggleVisibleButtons from './ToggleVisibleButtons'
 
 interface OwnProps {
 	token: string
-	loading: boolean
 	fetchingDates: boolean
 	fetchingPibalData: boolean
   scale: number

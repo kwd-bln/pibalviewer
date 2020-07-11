@@ -1,19 +1,19 @@
 import { reducerWithInitialState } from '../node_modules/typescript-fsa-reducers';
 import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SetCurrentWindInfoListAction } from './actions/index';
-import { LoginAction, StartLoadingAction, FinishLoadingAction, InputPassAction, InputUserAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, FinishFetchPibalDataAction, LogoutAction} from './actions/index'
+import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction} from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
 
 export const initialState: IState = {
 	token: "",
-	loading: false,
 	creatingToken: false,
 	fetchingDates: false,
 	fetchingPibalData: false,
 	hasError: false,
 	scale: 1,
 	selected: undefined,
-	dateInfoList: []
+	dateInfoList: [],
+	isTo: true
 }
 
 export type ApiData = {
@@ -33,20 +33,6 @@ const maxScale = 2
 const minScale = 0.5
 
 export const Reducer = reducerWithInitialState(initialState)
-	.case(StartLoadingAction, (state) => {
-		const loading = true
-		return { ...state, loading }
-	})
-	.case(FinishLoadingAction, (state) => {
-		const loading = false
-		return { ...state, loading }
-	})
-	.case(InputUserAction, (state, username) => {
-		return { ...state, username }
-	})
-	.case(InputPassAction, (state, password) => {
-		return { ...state, password }
-	})
 	.case(StartFetchDatesAction, state => {
 		const fetchingDates = true
 		return { ...state, fetchingDates}
@@ -58,10 +44,6 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(StartFetchPibalDataAction, state => {
 		const fetchingPibalData = true
 		return { ...state, fetchingPibalData }
-	})
-	.case(FinishFetchPibalDataAction, state => {
-		const fetchingPibalData = false
-		return { ...state, fetchingPibalData}
 	})
 	// 拡大する
 	.case(EnlargeAction, (state) => {

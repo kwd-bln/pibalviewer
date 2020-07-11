@@ -22,10 +22,6 @@ export const InputUserAction = actionCreator<string>('INPUT_USER')
 
 export const InputPassAction = actionCreator<string>('INPUT_PASS')
 
-export const StartLoadingAction = actionCreator('START_LOADING')
-
-export const FinishLoadingAction = actionCreator('FINISH_LOADING')
-
 export const StartCreateTokenAction = actionCreator<{username: string, password: string}>('START_CREATE_TOKEN')
 
 export const FinishCreateTokenAction = actionCreator('FINISH_CREATE_TOKEN')
@@ -37,8 +33,6 @@ export const FinishFetchDatesAction = actionCreator(FINISH_FETCH_DATES)
 export const SetDateInfoListAction = actionCreator<DateInfo[]>(SET_DATES)
 
 export const StartFetchPibalDataAction = actionCreator('START_FETCH_PIBALDATA')
-
-export const FinishFetchPibalDataAction = actionCreator('FINISH_FETCH_PIBALDATA')
 
 export const EnlargeAction = actionCreator('ACTION_ENLARGE')
 
