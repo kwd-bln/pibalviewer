@@ -13,7 +13,7 @@ const ToggleVisibleButtons: React.FC<Props> = (props) => {
   return (
     <Col xs={{ offset: 2, span: 10 }} sm={{ offset: 0, span: 4 }}>
       <div className="button-wrap">
-      {props.windInfoList.map((w, i) => {
+      {props.windInfoList.slice().reverse().map((w, i) => {
           const hue = Math.ceil(hueStep * i)
           const hslFill = "hsla(" + hue + ", 80%, 45%, 0.8)";
           const style: React.CSSProperties = {
@@ -27,7 +27,7 @@ const ToggleVisibleButtons: React.FC<Props> = (props) => {
             width: "80px",
           }
           return (
-            <Row>
+            <Row key={`toggle-${i}`}>
               <Col xs={{ offset: 1, span: 4 }} sm={{ offset: 0, span: 5 }}>
                 <div className="form-group">
                   <span className="switch">

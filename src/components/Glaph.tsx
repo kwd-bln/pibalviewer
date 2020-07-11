@@ -94,18 +94,24 @@ const Glaph: React.FC<Props> = (props) => {
 
     // 軸線の描画
     const padding = 50
-    const canvasWidth = getCanvasWidth() - padding
-    const canvasHeight = getCanvasHeight() - padding
+    const canvasRightX = getCanvasWidth() - padding
+    const canvasBottomY = getCanvasHeight() - padding
     ctx.beginPath();
     ctx.moveTo(padding, originY);
-    ctx.lineTo(canvasWidth, originY);
+    ctx.lineTo(canvasRightX, originY);
     ctx.moveTo(originX, padding);
-    ctx.lineTo(originX, canvasHeight);
-    // 斜め線
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(canvasWidth, canvasHeight);
-    ctx.moveTo(canvasWidth, padding);
-    ctx.lineTo(padding, canvasHeight);
+    ctx.lineTo(originX, canvasBottomY);
+
+    // 斜め線 30度ごと
+    const canvasHarfWidth = (originX - padding) / 2
+    ctx.moveTo(padding + canvasHarfWidth, padding);
+    ctx.lineTo(padding + canvasHarfWidth * 3, canvasBottomY);
+    ctx.moveTo(padding + canvasHarfWidth * 3, padding);
+    ctx.lineTo(padding + canvasHarfWidth, canvasBottomY);
+    ctx.moveTo(padding, padding + canvasHarfWidth);
+    ctx.lineTo(canvasRightX, padding + canvasHarfWidth * 3);
+    ctx.moveTo(padding, padding + canvasHarfWidth * 3);
+    ctx.lineTo(canvasRightX, padding + canvasHarfWidth);
     ctx.stroke()
 
     // scale円の描画
@@ -119,10 +125,10 @@ const Glaph: React.FC<Props> = (props) => {
     // scaleの描画
     ctx.beginPath()
     const scaleLineHeight = 10
-    ctx.moveTo(canvasWidth * 0.3, canvasHeight)
-    ctx.lineTo(canvasWidth * 0.3, canvasHeight + scaleLineHeight)
-    ctx.lineTo(canvasWidth * 0.3 + scaleLine, canvasHeight + scaleLineHeight)
-    ctx.lineTo(canvasWidth * 0.3 + scaleLine, canvasHeight)
+    ctx.moveTo(canvasRightX * 0.3, canvasBottomY)
+    ctx.lineTo(canvasRightX * 0.3, canvasBottomY + scaleLineHeight)
+    ctx.lineTo(canvasRightX * 0.3 + scaleLine, canvasBottomY + scaleLineHeight)
+    ctx.lineTo(canvasRightX * 0.3 + scaleLine, canvasBottomY)
     ctx.stroke()
     ctx.restore();
 
@@ -132,8 +138,8 @@ const Glaph: React.FC<Props> = (props) => {
     ctx.font = "14px Arial"
     ctx.textAlign = "center"
     ctx.fillText(scaleDistance.toString() + 'm',
-      canvasWidth * 0.3 + scaleLine * 0.5,
-      canvasHeight + scaleLineHeight * 2.5)
+      canvasRightX * 0.3 + scaleLine * 0.5,
+      canvasBottomY + scaleLineHeight * 2.5)
     ctx.restore()
 
     //　各点のプロット
@@ -143,7 +149,7 @@ const Glaph: React.FC<Props> = (props) => {
       if (data.visible) {
         const points = data.points
         // 色の決定
-        const hue = Math.ceil(hueStep * index)
+        const hue = Math.ceil(hueStep * (numOfPoints - index - 1))
         const hslStroke = "hsl(" + hue + ", 100%, 50%)";
         const hslFill = "hsl(" + hue + ", 80%, 45%)";
 
