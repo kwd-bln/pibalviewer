@@ -47,7 +47,7 @@ const NumberTable: React.FC<Props> = (props) => {
         rows.unshift(<div id='cell' key={`cell-${hi}-${ti}`} >x</div>)
       }
     }
-    const hue = Math.ceil(hueStep * ti)
+    const hue = Math.ceil(hueStep * (maxTimeIndex - ti -1))
     const hslFill = "hsla(" + hue + ", 80%, 50%, 0.8)";
     const style: React.CSSProperties = {
       color: 'white',
