@@ -31,7 +31,7 @@ const ToggleVisibleButtons: React.FC<Props> = (props) => {
               <Col xs={{ offset: 1, span: 4 }} sm={{ offset: 0, span: 5 }}>
                 <div className="form-group">
                   <span className="switch">
-                    <input type="checkbox" className="switch" id={`wind-${i}`} checked={props.windInfoList[i].visible} onClick={(e) => { props.onClickAt(i) }} readOnly />
+                    <input type="checkbox" className="switch" id={`wind-${i}`} checked={props.windInfoList[numOfPoints - i - 1].visible} onClick={(e) => { props.onClickAt(numOfPoints - i - 1) }} readOnly />
                     <label htmlFor={`wind-${i}`}></label>
                   </span>
                 </div>
