@@ -61,7 +61,8 @@ export const Reducer = reducerWithInitialState(initialState)
 	})
 	// pibalDateを取ってきてcurrentに入れる。
 	.case(SetCurrentWindInfoListAction, (state, selected) => {
-		return { ...state, selected }
+		const scale = 1.0
+		return { ...state, selected, scale }
 	})
 	// そのパイバルデータを見せる or 見せない
 	.case(ToggleVisibleAction, (state, pibalIndex) => {
