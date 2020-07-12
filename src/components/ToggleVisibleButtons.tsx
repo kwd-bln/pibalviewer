@@ -47,7 +47,7 @@ const ToggleVisibleButtons: React.FC<Props> = (props) => {
   )
 }
 
-function getHH_MM(hours: number, minutes: number):string {
+export function getHH_MM(hours: number, minutes: number):string {
 	const hh = ("00" + hours).slice(-2)
 	const mm = ("00" + minutes).slice(-2)
   const result = hh + ":" + mm
