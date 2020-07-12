@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from '../node_modules/typescript-fsa-reducers';
 import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SetCurrentWindInfoListAction } from './actions/index';
-import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction} from './actions/index'
+import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction, ToggleIsToAction} from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
 
@@ -84,5 +84,9 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(LogoutAction, state => {
 		const token = ""
 		return { ...state, token } 
+	})
+	.case(ToggleIsToAction, state => {
+		const isTo = !state.isTo
+		return { ...state, isTo }
 	})
 	.build()

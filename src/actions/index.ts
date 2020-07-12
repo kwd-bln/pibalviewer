@@ -49,3 +49,5 @@ export const LoadDataAction = actionCreator<boolean>('LOAD_DATA_ERROR')
 export const FetchedDataSuccessAction = actionCreator<ApiData>('FETCHED_DATA')
 
 export const SetCurrentWindInfoListAction = actionCreator<PibalDataInfo>(SET_WIND)
+
+export const ToggleIsToAction = actionCreator('TOGGLE_ISTO')

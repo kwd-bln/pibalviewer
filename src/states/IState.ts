@@ -9,4 +9,5 @@ export default interface IState {
   scale: number
   selected?: PibalDataInfo
   dateInfoList: DateInfo[]
+  isTo: boolean
 }

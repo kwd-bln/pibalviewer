@@ -99,16 +99,6 @@ body {
   overflow-x: hidden;
 }
 
-// .custom-control-label::before ,.custom-control-label::after{
-//   width:25px;
-//   height:20px;
-// }
-
-// .custom-switch .custom-control-label::after {
-//   width:16px;
-//   height:16px;
-// }
-
 .custom-switch {
   width:50px;
   height:50px;
@@ -261,4 +251,30 @@ $switch-transition: .2s all !default;
 .login-image {
   opacity: 0.3;
   position: absolute;
+}
+
+.toggle-to-from {
+  margin: 10px 0;
+  background-color: rgba(255, 255, 255, 0);
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  width: 90px;
+  height: 35px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  position: absolute;
+  bottom: 10%;
+  left: 30px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.toggle-to-from:focus {
+  outline: none
+}
+
+.svg-tofrom {
+  left: 3px;
+  width: 18px;
 }

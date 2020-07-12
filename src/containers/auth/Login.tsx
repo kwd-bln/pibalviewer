@@ -44,6 +44,7 @@ const Login: React.FC<LoginHandler> = (props) => {
             name={'username'}
             placeholder={'username'}
             type={'text'}
+            inputMode={'email'}
             isInvalid={errors.username !== undefined}
             ref={register({
               required: "入力が必要です！"

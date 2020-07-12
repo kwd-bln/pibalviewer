@@ -6,6 +6,7 @@ import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
 import { Table } from './Table';
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
 import ToggleVisibleButtons from './ToggleVisibleButtons'
+import ToggleIsToButton from './ToggleIsToButton'
 
 interface OwnProps {
 	token: string
@@ -13,7 +14,8 @@ interface OwnProps {
 	fetchingPibalData: boolean
   scale: number
   selected?: PibalDataInfo
-  dateInfoList: DateInfo[]
+	dateInfoList: DateInfo[]
+	isTo: boolean
 }
 type Props = OwnProps & TopPageHandler
 export class TopPageForm extends React.Component<Props> {
@@ -39,7 +41,7 @@ export class TopPageForm extends React.Component<Props> {
 									<Container className="px-0" fluid>
 										<Row>
 											<Col xs={12} sm={8} className="px-0">
-												<Glaph windInfoList={this.props.selected.windInfoList} scaleRatio={this.props.scale} />
+												<Glaph windInfoList={this.props.selected.windInfoList} scaleRatio={this.props.scale} isTo={this.props.isTo}/>
 												<ButtonGroup vertical className="myButtonClass">
 													<Button variant="info"
 														className="rounded-circle pull-right center-block my-button"
@@ -50,6 +52,7 @@ export class TopPageForm extends React.Component<Props> {
 														size="sm"
 														onClick={this.props.handleClickShrinkButton}>−</Button>
 												</ButtonGroup>
+												<ToggleIsToButton isTo={this.props.isTo} onClick={this.props.handleClickToggleIsToButton}/> 
 											</Col>
 											<ToggleVisibleButtons windInfoList={this.props.selected.windInfoList} onClickAt={this.props.handleOnSelectToggleButton} />
 										</Row>

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction } from "../actions/index";
+import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction, ToggleIsToAction } from "../actions/index";
 import { StartFetchDatesAction } from "../actions/index";
 import { TopPageForm } from "../components/TopPageForm";
 import { AppState } from "../store"
@@ -11,6 +11,7 @@ export interface TopPageHandler {
 	handleOnChangeValue(value: number): void
 	handleOnSelectToggleButton(value: number): void
 	handleOnLoadDates(): void
+	handleClickToggleIsToButton(): void
 }
 
 const mapStateToProps = (appState: AppState) => {
@@ -20,7 +21,8 @@ const mapStateToProps = (appState: AppState) => {
 		fetchingPibalData: appState.state.fetchingPibalData,
 		scale: appState.state.scale,
 		selected: appState.state.selected,
-		dateInfoList: appState.state.dateInfoList
+		dateInfoList: appState.state.dateInfoList,
+		isTo: appState.state.isTo
 	}
 }
 
@@ -31,6 +33,7 @@ const mapDispatchToProps = (dispatch: Dispatch): TopPageHandler => {
 		handleOnChangeValue: (value: number) => { dispatch(SelectFlightAction(value)) },
 		handleOnSelectToggleButton: (value: number) => { dispatch(ToggleVisibleAction(value)) },
 		handleOnLoadDates: () => { dispatch(StartFetchDatesAction()) },
+		handleClickToggleIsToButton: () => { dispatch(ToggleIsToAction())}
 	}
 }
 

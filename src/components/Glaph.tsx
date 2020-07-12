@@ -16,7 +16,8 @@ type PointsInfo = {
 
 interface Props {
   windInfoList: WindInfo[],
-  scaleRatio: number
+  scaleRatio: number,
+  isTo: boolean
 }
 
 const Glaph: React.FC<Props> = (props) => {
@@ -162,8 +163,8 @@ const Glaph: React.FC<Props> = (props) => {
           ctx.fillStyle = hslFill;
           ctx.beginPath();
           ctx.moveTo(x, y);
-          x = originX + point.x * scale
-          y = originY - point.y * scale
+          x = originX + (props.isTo ? (-point.x * scale) : point.x * scale)
+          y = originY - (props.isTo ? (-point.y * scale) : point.y * scale)
           ctx.lineTo(x, y);
           ctx.stroke();
           ctx.moveTo(x, y);
