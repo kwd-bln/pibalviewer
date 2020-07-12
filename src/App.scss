@@ -278,3 +278,61 @@ $switch-transition: .2s all !default;
   left: 3px;
   width: 18px;
 }
+
+#display-flex {
+  display: flex;
+}
+
+#holizontal-scroll {
+  // width: 50%;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+#cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 25px;
+  border: solid thin #999;
+  text-align: center;
+  font-size: 14px;
+}
+
+.small-left {
+  width: 70%;
+  text-align: center;
+  font-size: 14px;
+}
+
+.small-right {
+  width: 30%;
+  text-align: center;
+  font-size: 12px;
+  border-left: solid thin #777;
+}
+
+div.altitude-cell {
+  width: 70px !important;
+  border-right: solid 2px #000 !important;
+}
+
+.margin-top-10px {
+  margin-top: 10px;
+}
+
+.hsl-image {
+  width: 70%;
+  max-width: 500px;
+  opacity: 0.9;
+}
+
+#centering {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}

@@ -3,7 +3,7 @@ import { TopPageHandler } from '../containers/TopPageContainer';
 import SelectList from './SelectList'
 import Glaph from './Glaph'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
-import { Table } from './Table';
+import NumberTable from './NumberTable'
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
 import ToggleVisibleButtons from './ToggleVisibleButtons'
 import ToggleIsToButton from './ToggleIsToButton'
@@ -58,9 +58,11 @@ export class TopPageForm extends React.Component<Props> {
 										</Row>
 									</Container>
 								</Tab>
-									<Tab eventKey="table" title="Table" tabClassName="my-tab">
-									<div>
-									<Table selectedId={this.props.selected.id} windInfoList={this.props.selected.windInfoList}/>
+								<Tab eventKey="table" title="Table" tabClassName="my-tab">
+									<NumberTable windInfoList={this.props.selected.windInfoList}/>
+									<div id="centering">
+										<h4>背景色と角度について（少し左にずれてるので作り直し）</h4>
+										<img src={require("./img/hsl.png")} className="hsl-image"/>
 									</div>
 								</Tab>
 							</Tabs>
