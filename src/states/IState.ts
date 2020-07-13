@@ -10,4 +10,6 @@ export default interface IState {
   selected?: PibalDataInfo
   dateInfoList: DateInfo[]
   isTo: boolean
+  glpahIsTo: boolean
+  isKt: boolean
 }

@@ -5,6 +5,8 @@ import { getHH_MM } from './ToggleVisibleButtons'
 
 interface Props {
   windInfoList: WindInfo[]
+  isTo: boolean
+  isKt: boolean
 }
 
 const NumberTable: React.FC<Props> = (props) => {
@@ -35,14 +37,16 @@ const NumberTable: React.FC<Props> = (props) => {
     for (let hi = 0; hi < maxHeightIndex; hi++) {
       if ( hi < winds.length) {
         const deg = winds[hi].deg
+        const dispalyDeg = (deg + (props.isTo ? 180 : 0)) % 360
         const spd = winds[hi].spd
         const slappedSpd = Math.min(maxSpeed, spd)
+        const disPlaySpeed = props.isKt ? spd : Math.round(spd * 1.852)
         const alpha = (minAlpha * (maxSpeed - slappedSpd) + maxAlpha * slappedSpd) / maxSpeed
         const style: React.CSSProperties = {
           backgroundColor: `hsla(${deg},50%,50%, ${alpha})`
         }
 
-        rows.unshift(<div id='cell' style={style} key={`cell-${hi}-${ti}`} ><div className="small-left">{deg}</div><div className="small-right">{spd}</div></div>)
+        rows.unshift(<div id='cell' style={style} key={`cell-${hi}-${ti}`} ><div className="small-left">{dispalyDeg}</div><div className="small-right">{disPlaySpeed}</div></div>)
       } else {
         rows.unshift(<div id='cell' key={`cell-${hi}-${ti}`} >x</div>)
       }

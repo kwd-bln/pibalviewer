@@ -51,3 +51,7 @@ export const FetchedDataSuccessAction = actionCreator<ApiData>('FETCHED_DATA')
 export const SetCurrentWindInfoListAction = actionCreator<PibalDataInfo>(SET_WIND)
 
 export const ToggleIsToAction = actionCreator('TOGGLE_ISTO')
+
+export const ToggleGlaphIsToAction = actionCreator('TOGGLE_GLAPHISTO')
+
+export const ToggleIsKtAction = actionCreator('TOGGLE_ISKT')

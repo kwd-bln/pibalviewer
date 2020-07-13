@@ -336,3 +336,27 @@ div.altitude-cell {
   width: 100%;
   text-align: center;
 }
+
+.toggle-table {
+  margin: 10px 10px;
+  background-color: rgba(255, 255, 255, 0);
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  width: 90px;
+  height: 35px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  left: 30px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.toggle-table:focus {
+  outline: none
+}
+
+.table-button-container {
+  display: flex;
+  justify-content: center;
+}

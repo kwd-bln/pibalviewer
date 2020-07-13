@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from '../node_modules/typescript-fsa-reducers';
 import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SetCurrentWindInfoListAction } from './actions/index';
-import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction, ToggleIsToAction} from './actions/index'
+import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction, ToggleIsToAction, ToggleGlaphIsToAction, ToggleIsKtAction } from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
 
@@ -13,7 +13,9 @@ export const initialState: IState = {
 	scale: 1,
 	selected: undefined,
 	dateInfoList: [],
-	isTo: true
+	isTo: true,
+	glpahIsTo: true,
+	isKt: false
 }
 
 export type ApiData = {
@@ -29,7 +31,7 @@ type WindApi = {
 }
 
 
-const maxScale = 2
+const maxScale = 3
 const minScale = 0.5
 
 export const Reducer = reducerWithInitialState(initialState)
@@ -89,5 +91,13 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(ToggleIsToAction, state => {
 		const isTo = !state.isTo
 		return { ...state, isTo }
+	})
+	.case(ToggleGlaphIsToAction, state => {
+		const glpahIsTo = !state.glpahIsTo
+		return { ...state, glpahIsTo }
+	})
+	.case(ToggleIsKtAction, state => {
+		const isKt = !state.isKt
+		return { ...state, isKt }
 	})
 	.build()

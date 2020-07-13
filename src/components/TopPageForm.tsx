@@ -7,6 +7,7 @@ import NumberTable from './NumberTable'
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
 import ToggleVisibleButtons from './ToggleVisibleButtons'
 import ToggleIsToButton from './ToggleIsToButton'
+import ToggleIsKtButton from './ToggleIsKtButton'
 
 interface OwnProps {
 	token: string
@@ -16,6 +17,8 @@ interface OwnProps {
   selected?: PibalDataInfo
 	dateInfoList: DateInfo[]
 	isTo: boolean
+	glaphIsTo: boolean
+	isKt: boolean
 }
 type Props = OwnProps & TopPageHandler
 export class TopPageForm extends React.Component<Props> {
@@ -59,7 +62,11 @@ export class TopPageForm extends React.Component<Props> {
 									</Container>
 								</Tab>
 								<Tab eventKey="table" title="Table" tabClassName="my-tab">
-									<NumberTable windInfoList={this.props.selected.windInfoList}/>
+									<div className="table-button-container">
+										<ToggleIsToButton isTo={this.props.glaphIsTo} onClick={this.props.handleClickToggleGlaphIsToButton} className='toggle-table'/>
+										<ToggleIsKtButton isKt={this.props.isKt} onClick={this.props.handleClickToggleIsKtButton}/> 
+									</div>
+									<NumberTable windInfoList={this.props.selected.windInfoList} isTo={this.props.glaphIsTo} isKt={this.props.isKt}/>
 									<div id="centering">
 										<h4>背景色と角度について（少し左にずれてるので作り直し）</h4>
 										<img src={require("./img/hsl.png")} className="hsl-image"/>
