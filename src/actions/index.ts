@@ -55,3 +55,5 @@ export const ToggleIsToAction = actionCreator('TOGGLE_ISTO')
 export const ToggleGlaphIsToAction = actionCreator('TOGGLE_GLAPHISTO')
 
 export const ToggleIsKtAction = actionCreator('TOGGLE_ISKT')
+
+export const SelectTimeAction = actionCreator<number>('SELECT_TIME')

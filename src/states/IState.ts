@@ -12,4 +12,5 @@ export default interface IState {
   isTo: boolean
   glpahIsTo: boolean
   isKt: boolean
+  selectedTimeIndex: number
 }

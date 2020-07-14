@@ -2,6 +2,9 @@ import React from 'react'
 import { TopPageHandler } from '../containers/TopPageContainer';
 import SelectList from './SelectList'
 import Glaph from './Glaph'
+import StrategyGlaph from './StrategyGlaph'
+import SelectTimeButtons from './SelectTimeButtons'
+import StrategyTable from './StrategyTable'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
 import NumberTable from './NumberTable'
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
@@ -19,6 +22,7 @@ interface OwnProps {
 	isTo: boolean
 	glaphIsTo: boolean
 	isKt: boolean
+	selectedTimeIndex: number
 }
 type Props = OwnProps & TopPageHandler
 export class TopPageForm extends React.Component<Props> {
@@ -32,15 +36,15 @@ export class TopPageForm extends React.Component<Props> {
 	}
 
 	render() {
-		
 		return (
 			<React.Fragment>
 				<SelectList dateInfoList={this.props.dateInfoList} onChange={this.props.handleOnChangeValue}/>
 				{(() => {
 					if (this.props.selected) {
+						const selectedTimeWindInfo = this.props.selected.windInfoList[this.props.selectedTimeIndex]
 						return (
 							<Tabs defaultActiveKey="glaph" id="uncontrolled-tab-example" className="nav-justified">
-								<Tab eventKey="glaph" title="Glaph" tabClassName="my-tab">
+								<Tab eventKey="glaph" title="Dst Glaph" tabClassName="my-tab">
 									<Container className="px-0" fluid>
 										<Row>
 											<Col xs={12} sm={8} className="px-0">
@@ -61,9 +65,24 @@ export class TopPageForm extends React.Component<Props> {
 										</Row>
 									</Container>
 								</Tab>
+								<Tab eventKey="st-table" title="Spd Glaph" tabClassName="nav-justified">
+									<Container className="px-0" fluid>
+										<Row>
+											<Col xs={12}>
+												<SelectTimeButtons windInfoList={this.props.selected.windInfoList} selectedTimeIndex={this.props.selectedTimeIndex} onClick={this.props.handleOnChangeTimeIndex}/>
+											</Col>
+										</Row>
+										<Row>
+											<Col xs={12} sm={8} className="px-0" id="display-flex">
+												<StrategyTable num={selectedTimeWindInfo.winds.length} />
+												<StrategyGlaph windInfo={selectedTimeWindInfo} />
+											</Col>
+										</Row>
+									</Container>
+								</Tab>
 								<Tab eventKey="table" title="Table" tabClassName="my-tab">
 									<div className="table-button-container">
-										<ToggleIsToButton isTo={this.props.glaphIsTo} onClick={this.props.handleClickToggleGlaphIsToButton} className='toggle-table'/>
+										<ToggleIsToButton isTo={this.props.glaphIsTo} onClick={this.props.handleClickToggleGlaphIsToButton} className='toggle-table' />
 										<ToggleIsKtButton isKt={this.props.isKt} onClick={this.props.handleClickToggleIsKtButton}/> 
 									</div>
 									<NumberTable windInfoList={this.props.selected.windInfoList} isTo={this.props.glaphIsTo} isKt={this.props.isKt}/>

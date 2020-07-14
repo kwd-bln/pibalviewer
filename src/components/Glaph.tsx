@@ -41,7 +41,7 @@ const Glaph: React.FC<Props> = (props) => {
     return canvas.height
   }
 
-  useEffect(() => {    
+  useEffect(() => {  
     // どこの点をとるかの計算
     let pointsList: PointsInfo[] = []
 

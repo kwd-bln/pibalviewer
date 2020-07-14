@@ -12,7 +12,6 @@ interface Props {
 const NumberTable: React.FC<Props> = (props) => {
   // 配置する位置を計算するための準備
   const maxHeightIndex = Math.max(...props.windInfoList.map(info => info.winds.length))
-  const maxTimeIndex = props.windInfoList.length
   const numOfPoints = props.windInfoList.length
   const hueStep = Math.min(360 / numOfPoints, 40)
 
@@ -29,7 +28,7 @@ const NumberTable: React.FC<Props> = (props) => {
   altCols.unshift(<div id='cell' className="altitude-cell" key="cell-alt-row" >Alt(m)</div>)
 
   const cols = []
-  for (let ti = 0; ti < maxTimeIndex; ti++) {
+  for (let ti = 0; ti < numOfPoints; ti++) {
     const windInfo = props.windInfoList[ti]
     const winds = windInfo.winds
 
@@ -43,7 +42,7 @@ const NumberTable: React.FC<Props> = (props) => {
         const disPlaySpeed = props.isKt ? spd : Math.round(spd * 1.852)
         const alpha = (minAlpha * (maxSpeed - slappedSpd) + maxAlpha * slappedSpd) / maxSpeed
         const style: React.CSSProperties = {
-          backgroundColor: `hsla(${deg},50%,50%, ${alpha})`
+          backgroundColor: `hsla(${deg},80%,50%, ${alpha})`
         }
 
         rows.unshift(<div id='cell' style={style} key={`cell-${hi}-${ti}`} ><div className="small-left">{dispalyDeg}</div><div className="small-right">{disPlaySpeed}</div></div>)
@@ -51,7 +50,7 @@ const NumberTable: React.FC<Props> = (props) => {
         rows.unshift(<div id='cell' key={`cell-${hi}-${ti}`} >x</div>)
       }
     }
-    const hue = Math.ceil(hueStep * (maxTimeIndex - ti -1))
+    const hue = Math.ceil(hueStep * (numOfPoints - ti -1))
     const hslFill = "hsla(" + hue + ", 80%, 50%, 0.8)";
     const style: React.CSSProperties = {
       color: 'white',

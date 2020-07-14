@@ -1,6 +1,6 @@
 import { reducerWithInitialState } from '../node_modules/typescript-fsa-reducers';
 import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SetCurrentWindInfoListAction } from './actions/index';
-import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction, ToggleIsToAction, ToggleGlaphIsToAction, ToggleIsKtAction } from './actions/index'
+import { LoginAction, StartFetchDatesAction, FinishFetchDatesAction, StartFetchPibalDataAction, LogoutAction, ToggleIsToAction, ToggleGlaphIsToAction, ToggleIsKtAction, SelectTimeAction } from './actions/index'
 import { SetDateInfoListAction } from './actions/index';
 import IState from './states/IState'
 
@@ -15,7 +15,8 @@ export const initialState: IState = {
 	dateInfoList: [],
 	isTo: true,
 	glpahIsTo: true,
-	isKt: false
+	isKt: false,
+	selectedTimeIndex: 0
 }
 
 export type ApiData = {
@@ -63,8 +64,9 @@ export const Reducer = reducerWithInitialState(initialState)
 	})
 	// pibalDateを取ってきてcurrentに入れる。
 	.case(SetCurrentWindInfoListAction, (state, selected) => {
+		const selectedTimeIndex = selected.windInfoList.length - 1
 		const scale = 1.0
-		return { ...state, selected, scale }
+		return { ...state, selected, scale, selectedTimeIndex }
 	})
 	// そのパイバルデータを見せる or 見せない
 	.case(ToggleVisibleAction, (state, pibalIndex) => {
@@ -99,5 +101,8 @@ export const Reducer = reducerWithInitialState(initialState)
 	.case(ToggleIsKtAction, state => {
 		const isKt = !state.isKt
 		return { ...state, isKt }
+	})
+	.case(SelectTimeAction, (state, selectedTimeIndex) => {
+		return { ...state, selectedTimeIndex }
 	})
 	.build()
