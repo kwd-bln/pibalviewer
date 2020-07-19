@@ -35,7 +35,7 @@ const Login: React.FC<LoginHandler> = (props) => {
 
   return (
     <React.Fragment>
-      <img src={require("./img/fusen_fly_man.png")} className="login-image"></img>
+      <img src={require("./img/fusen_fly_man.png")} className="login-image" alt="pibal-man"></img>
     <Form noValidate onSubmit={handleSubmit(handleOnSubmit)}>
       <Form.Group as={Row} controlId={'username'} className="login-form">
         <Form.Label column sm={3} xs={12}>{'ユーザー名'}</Form.Label>

@@ -1,6 +1,4 @@
 import React from 'react'
-import { WindInfo } from "../states/IPibalDataList"
-import { getHH_MM } from './ToggleVisibleButtons'
 
 interface OwnProps {
   text: string

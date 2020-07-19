@@ -17,27 +17,21 @@ interface AuthHandler {
   setLocalStorageToken(auth_token: string): void
 }
 
-class Auth extends React.Component<OwnProps&AuthHandler> {
-  constructor(props: OwnProps&AuthHandler) {
-    super(props)
-  }
-
-  render() {
-    const auth_token = localStorage.auth_token
-    if (auth_token && !this.props.token) {
+const Auth: React.FC<OwnProps&AuthHandler> = props => {
+  const auth_token = localStorage.auth_token
+    if (auth_token && !props.token) {
       // localStorageにtokenがあって、stateにtokenがない場合、tokenをsetする
-      this.props.setLocalStorageToken(auth_token) 
+      props.setLocalStorageToken(auth_token) 
     }
-    if (this.props.token.length || auth_token) {
+    if (props.token.length || auth_token) {
       return (
-        <Route children={this.props.children} />
+        <Route children={props.children} />
       )
     } else {
       return (
         <Redirect to={'/login'} />
       )
     }
-  }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): AuthHandler => {
@@ -45,7 +39,6 @@ const mapDispatchToProps = (dispatch: Dispatch): AuthHandler => {
     setLocalStorageToken: (auth_token: string) => { dispatch(LoginAction(auth_token)) }
   }
 }
-
 
 const mapStateToProps = (appState: AppState) => {
   return {

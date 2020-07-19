@@ -88,7 +88,7 @@ export class TopPageForm extends React.Component<Props> {
 									<NumberTable windInfoList={this.props.selected.windInfoList} isTo={this.props.glaphIsTo} isKt={this.props.isKt}/>
 									<div id="centering">
 										<h4>背景色と角度について（少し左にずれてるので作り直し）</h4>
-										<img src={require("./img/hsl.png")} className="hsl-image"/>
+										<img src={require("./img/hsl.png")} className="hsl-image" alt="hsl-circle"/>
 									</div>
 								</Tab>
 							</Tabs>

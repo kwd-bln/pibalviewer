@@ -44,7 +44,9 @@ export function authorize(user: string, pass: string): Promise<{token?: string, 
 
 export function fetchDetes(token: string): Promise<{dateList?: DateInfo[], error?: string}> {
   return fetch('https://oval-silicon-280513.an.r.appspot.com/api/v1/dates', {
-    headers: { 'x-access-token': token }
+    headers: { 
+      'x-access-token': token,
+      mode: "cors" }
   }).then(res => res.json())
   .then(obj => {
     const apiDateList: ApiDateAndTiming[] = obj.data
@@ -66,7 +68,9 @@ export function fetchDetes(token: string): Promise<{dateList?: DateInfo[], error
 export function fetchWindInfo(token: string, date: Date, timePeriod: string): Promise<{windInfoList?: WindInfo[], error?: string}> {
   const yyyymmdd = getYYYYMMDD(date)
   return fetch(`https://oval-silicon-280513.an.r.appspot.com/api/v1/${yyyymmdd}/${timePeriod}`, {
-		headers: { 'x-access-token': token }
+		headers: { 
+      'x-access-token': token,
+      mode: "cors" }
   })
   .then(res => res.json())
   .then(obj => {
