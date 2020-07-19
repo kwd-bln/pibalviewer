@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import { WindInfo } from "../states/IPibalDataList"
+import { WindInfo } from "../../states/IPibalDataList"
 
 type Point = {
   x: number,

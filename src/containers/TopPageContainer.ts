@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { EnlargeAction, ShirinkAction, ToggleVisibleAction, SelectFlightAction, ToggleIsToAction, ToggleGlaphIsToAction, ToggleIsKtAction, SelectTimeAction } from "../actions/index";
 import { StartFetchDatesAction } from "../actions/index";
-import { TopPageForm } from "../components/TopPageForm";
+import { TopPage } from "../components/TopPage";
 import { AppState } from "../store"
 
 export interface TopPageHandler {
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch: Dispatch): TopPageHandler => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopPageForm)
+export default connect(mapStateToProps, mapDispatchToProps)(TopPage)
 
 export function getYYYY_MM_DD(date: Date):string {
 	const y = date.getFullYear().toString()

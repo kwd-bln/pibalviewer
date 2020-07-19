@@ -1,6 +1,6 @@
 import React from 'react'
-import { WindInfo } from "../states/IPibalDataList"
-import { getHH_MM } from './ToggleVisibleButtons'
+import { WindInfo } from "../../states/IPibalDataList"
+import { getHH_MM } from '../DstGlaph/ToggleVisibleButtons'
 import SelectTimeButton from './SelectTimeButton'
 
 interface OwnProps {

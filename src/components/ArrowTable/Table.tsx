@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowLine, Arrow, Position } from "./ArrowLine"
 
-import { WindInfo } from "../states/IPibalDataList"
+import { WindInfo } from "../../states/IPibalDataList"
 import Svg from "./Svg"
 
 interface Props {

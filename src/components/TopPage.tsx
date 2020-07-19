@@ -1,16 +1,16 @@
 import React from 'react'
 import { TopPageHandler } from '../containers/TopPageContainer';
 import SelectList from './SelectList'
-import Glaph from './Glaph'
-import StrategyGlaph from './StrategyGlaph'
-import SelectTimeButtons from './SelectTimeButtons'
-import StrategyTable from './StrategyTable'
+import Glaph from './DstGlaph/Glaph'
+import StrategyGlaph from './SpdGlaph/StrategyGlaph'
+import SelectTimeButtons from './SpdGlaph/SelectTimeButtons'
+import StrategyTable from './SpdGlaph/StrategyTable'
 import { PibalDataInfo, DateInfo } from '../states/IPibalDataList'
-import NumberTable from './NumberTable'
+import NumberTable from './Table/NumberTable'
 import { Tab, Tabs, Col, Button, Row, Container, ButtonGroup } from 'react-bootstrap'
-import ToggleVisibleButtons from './ToggleVisibleButtons'
+import ToggleVisibleButtons from './DstGlaph/ToggleVisibleButtons'
 import ToggleIsToButton from './ToggleIsToButton'
-import ToggleIsKtButton from './ToggleIsKtButton'
+import ToggleIsKtButton from './Table/ToggleIsKtButton'
 
 interface OwnProps {
 	token: string
@@ -25,7 +25,7 @@ interface OwnProps {
 	selectedTimeIndex: number
 }
 type Props = OwnProps & TopPageHandler
-export class TopPageForm extends React.Component<Props> {
+export class TopPage extends React.Component<Props> {
 	componentDidMount() {
 		if (this.props.token) {
 			if (this.props.dateInfoList.length === 0) {

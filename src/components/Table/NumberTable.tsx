@@ -1,7 +1,7 @@
 
 import React from "react";
-import { WindInfo } from "../states/IPibalDataList"
-import { getHH_MM } from './ToggleVisibleButtons'
+import { WindInfo } from "../../states/IPibalDataList"
+import { getHH_MM } from '../DstGlaph/ToggleVisibleButtons'
 
 interface Props {
   windInfoList: WindInfo[]

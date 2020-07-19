@@ -1,5 +1,5 @@
 import React from 'react';
-import { WindInfo } from "../states/IPibalDataList";
+import { WindInfo } from "../../states/IPibalDataList";
 import { Row, Col } from 'react-bootstrap'
 
 interface Props {
