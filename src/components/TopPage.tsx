@@ -36,6 +36,7 @@ export class TopPage extends React.Component<Props> {
 	}
 
 	render() {
+		const tableHslImg = this.props.glaphIsTo ? 'hsl_to' : 'hsl_from'
 		return (
 			<React.Fragment>
 				<SelectList dateInfoList={this.props.dateInfoList} onChange={this.props.handleOnChangeValue}/>
@@ -87,8 +88,7 @@ export class TopPage extends React.Component<Props> {
 									</div>
 									<NumberTable windInfoList={this.props.selected.windInfoList} isTo={this.props.glaphIsTo} isKt={this.props.isKt}/>
 									<div id="centering">
-										<h4>背景色と角度について（少し左にずれてるので作り直し）</h4>
-										<img src={require("./img/hsl.png")} className="hsl-image" alt="hsl-circle"/>
+										<img src={require(`./img/${tableHslImg}.png`)} className="hsl-image" alt="hsl-circle"/>
 									</div>
 								</Tab>
 							</Tabs>
