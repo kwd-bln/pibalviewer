@@ -66,7 +66,7 @@ export class TopPage extends React.Component<Props> {
 										</Row>
 									</Container>
 								</Tab>
-								<Tab eventKey="st-table" title="Spd Glaph" tabClassName="nav-justified">
+								<Tab eventKey="st-table" title="Spd Glaph" tabClassName="my-tab">
 									<Container className="px-0" fluid>
 										<Row>
 											<Col xs={12}>
@@ -75,7 +75,7 @@ export class TopPage extends React.Component<Props> {
 										</Row>
 										<Row>
 											<Col xs={12} sm={8} className="px-0" id="display-flex">
-												<StrategyTable num={selectedTimeWindInfo.winds.length} />
+												<StrategyTable num={selectedTimeWindInfo.winds.length} windInfo={selectedTimeWindInfo}/>
 												<StrategyGlaph windInfo={selectedTimeWindInfo} />
 											</Col>
 										</Row>
