@@ -157,6 +157,7 @@ const Glaph: React.FC<Props> = (props) => {
         // 一つの時間のpibaldataを描画
         let x = originX
         let y = originY
+        ctx.lineWidth = 2
         points.forEach(point => {
           ctx.save();
           ctx.strokeStyle = hslStroke;
@@ -168,7 +169,7 @@ const Glaph: React.FC<Props> = (props) => {
           ctx.lineTo(x, y);
           ctx.stroke();
           ctx.moveTo(x, y);
-          ctx.arc(x, y, 3, 0, Math.PI * 2);
+          ctx.arc(x, y, 4, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
         })
