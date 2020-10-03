@@ -46,7 +46,8 @@ export function fetchDetes(token: string): Promise<{dateList?: DateInfo[], error
   return fetch('https://oval-silicon-280513.an.r.appspot.com/api/v1/dates', {
     headers: { 
       'x-access-token': token,
-      mode: "cors" }
+      mode: "cors",
+      cache: "no-cache" }
   }).then(res => res.json())
   .then(obj => {
     const apiDateList: ApiDateAndTiming[] = obj.data
@@ -70,7 +71,8 @@ export function fetchWindInfo(token: string, date: Date, timePeriod: string): Pr
   return fetch(`https://oval-silicon-280513.an.r.appspot.com/api/v1/${yyyymmdd}/${timePeriod}`, {
 		headers: { 
       'x-access-token': token,
-      mode: "cors" }
+      mode: "cors",
+      cache: "no-cache" }
   })
   .then(res => res.json())
   .then(obj => {
