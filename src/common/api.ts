@@ -88,7 +88,7 @@ export function fetchWindInfo(token: string, date: Date, timePeriod: string): Pr
 						deg: w.degree,
 						spd: w.speed
 					}
-				})
+				}).sort((wa, wb) => { return wa.alt > wb.alt ? 1 : -1 })
 				windInfoList.push({
 					hours: hours,
 					minutes: minutes,
