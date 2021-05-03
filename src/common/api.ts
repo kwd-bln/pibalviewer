@@ -106,7 +106,7 @@ export function fetchWindInfo(token: string, date: Date, timePeriod: string): Pr
 }
 
 function getYYYYMMDD(date: Date):string {
-  const y = 2020
+  const y = 2021
   const dateMonth: number = date.getMonth()
   const numMonth = dateMonth === 0 ? dateMonth + 12 : dateMonth
 	const m = ("00" + numMonth).slice(-2)
